@@ -99,4 +99,4 @@ Observabilidade completa do sistema com métricas, logs e dashboards.
 
 ---
 
-Consulte cada diretório para documentação detalhada de cada ecossistema.
+Consulte os repositórios de cada container listados acima para documentação detalhada.
