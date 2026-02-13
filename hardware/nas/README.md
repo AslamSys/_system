@@ -43,13 +43,13 @@ Este hardware executa **8 containers** especializados em armazenamento:
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
 | **nas-brain** | LLM para organização (Qwen 1.5B) | ⏳ | [AslamSys/nas-brain](https://github.com/AslamSys/nas-brain) |
-| **file-sync** | Sincronização Syncthing | ⏳ | [AslamSys/file-sync](https://github.com/AslamSys/file-sync) |
-| **photo-backup** | Backup fotos PhotoPrism + iCloud | ⏳ | [AslamSys/photo-backup](https://github.com/AslamSys/photo-backup) |
-| **object-storage** | MinIO S3-compatible | ⏳ | [AslamSys/object-storage](https://github.com/AslamSys/object-storage) |
-| **deduplication** | Deduplicação Btrfs + rmlint | ⏳ | [AslamSys/deduplication](https://github.com/AslamSys/deduplication) |
-| **smb-server** | Compartilhamentos Samba | ⏳ | [AslamSys/smb-server](https://github.com/AslamSys/smb-server) |
-| **backup-manager** | Backup incremental Restic | ⏳ | [AslamSys/backup-manager](https://github.com/AslamSys/backup-manager) |
-| **media-indexer** | AI tagging + reconhecimento facial | ⏳ | [AslamSys/media-indexer](https://github.com/AslamSys/media-indexer) |
+| **file-sync** | Sincronização Syncthing | ⏳ | [AslamSys/nas-file-sync](https://github.com/AslamSys/nas-file-sync) |
+| **photo-backup** | Backup fotos PhotoPrism + iCloud | ⏳ | [AslamSys/nas-photo-backup](https://github.com/AslamSys/nas-photo-backup) |
+| **object-storage** | MinIO S3-compatible | ⏳ | [AslamSys/nas-object-storage](https://github.com/AslamSys/nas-object-storage) |
+| **deduplication** | Deduplicação Btrfs + rmlint | ⏳ | [AslamSys/nas-deduplication](https://github.com/AslamSys/nas-deduplication) |
+| **smb-server** | Compartilhamentos Samba | ⏳ | [AslamSys/nas-smb-server](https://github.com/AslamSys/nas-smb-server) |
+| **backup-manager** | Backup incremental Restic | ⏳ | [AslamSys/nas-backup-manager](https://github.com/AslamSys/nas-backup-manager) |
+| **media-indexer** | AI tagging + reconhecimento facial | ⏳ | [AslamSys/nas-media-indexer](https://github.com/AslamSys/nas-media-indexer) |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando

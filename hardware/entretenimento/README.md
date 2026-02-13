@@ -38,11 +38,11 @@ Este hardware executa **6 containers** especializados em entretenimento:
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
 | **entretenimento-brain** | LLM para mídia (Qwen 1.5B) | ⏳ | [AslamSys/entretenimento-brain](https://github.com/AslamSys/entretenimento-brain) |
-| **media-server** | Servidor Jellyfin | ⏳ | [AslamSys/media-server](https://github.com/AslamSys/media-server) |
-| **download-manager** | qBittorrent + Jackett | ⏳ | [AslamSys/download-manager](https://github.com/AslamSys/download-manager) |
-| **media-organizer** | Radarr + Sonarr | ⏳ | [AslamSys/media-organizer](https://github.com/AslamSys/media-organizer) |
-| **subtitle-fetcher** | Bazarr legendas | ⏳ | [AslamSys/subtitle-fetcher](https://github.com/AslamSys/subtitle-fetcher) |
-| **streaming-aggregator** | APIs Netflix, Spotify | ⏳ | [AslamSys/streaming-aggregator](https://github.com/AslamSys/streaming-aggregator) |
+| **media-server** | Servidor Jellyfin | ⏳ | [AslamSys/entretenimento-media-server](https://github.com/AslamSys/entretenimento-media-server) |
+| **download-manager** | qBittorrent + Jackett | ⏳ | [AslamSys/entretenimento-download-manager](https://github.com/AslamSys/entretenimento-download-manager) |
+| **media-organizer** | Radarr + Sonarr | ⏳ | [AslamSys/entretenimento-radarr-movies](https://github.com/AslamSys/entretenimento-radarr-movies) |
+| **subtitle-fetcher** | Bazarr legendas | ⏳ | [AslamSys/entretenimento-bazarr-subtitles](https://github.com/AslamSys/entretenimento-bazarr-subtitles) |
+| **streaming-aggregator** | APIs Netflix, Spotify | ⏳ | [AslamSys/entretenimento-streaming-aggregator](https://github.com/AslamSys/entretenimento-streaming-aggregator) |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando

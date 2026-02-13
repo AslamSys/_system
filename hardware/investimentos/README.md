@@ -37,12 +37,12 @@ Este hardware executa **7 containers** especializados em investimentos:
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
 | **investimentos-brain** | LLM financeiro (Qwen 3B) | ⏳ | [AslamSys/investimentos-brain](https://github.com/AslamSys/investimentos-brain) |
-| **stock-trading-bot** | Trading automatizado | ⏳ | [AslamSys/stock-trading-bot](https://github.com/AslamSys/stock-trading-bot) |
-| **technical-analysis** | Análise técnica (TA-Lib) | ⏳ | [AslamSys/technical-analysis](https://github.com/AslamSys/technical-analysis) |
-| **news-sentiment** | Sentiment analysis (FinBERT) | ⏳ | [AslamSys/news-sentiment](https://github.com/AslamSys/news-sentiment) |
-| **betting-bot** | Apostas esportivas | ⏳ | [AslamSys/betting-bot](https://github.com/AslamSys/betting-bot) |
-| **ml-predictor** | Machine Learning (LSTM/LightGBM) | ⏳ | [AslamSys/ml-predictor](https://github.com/AslamSys/ml-predictor) |
-| **portfolio-manager** | Gestão de portfolio | ⏳ | [AslamSys/portfolio-manager](https://github.com/AslamSys/portfolio-manager) |
+| **stock-trading-bot** | Trading automatizado | ⏳ | [AslamSys/investimentos-trading-bot](https://github.com/AslamSys/investimentos-trading-bot) |
+| **technical-analysis** | Análise técnica (TA-Lib) | ⏳ | [AslamSys/investimentos-technical-analysis](https://github.com/AslamSys/investimentos-technical-analysis) |
+| **news-sentiment** | Sentiment analysis (FinBERT) | ⏳ | [AslamSys/investimentos-news-sentiment](https://github.com/AslamSys/investimentos-news-sentiment) |
+| **betting-bot** | Apostas esportivas | ⏳ | [AslamSys/investimentos-betting-bot](https://github.com/AslamSys/investimentos-betting-bot) |
+| **ml-predictor** | Machine Learning (LSTM/LightGBM) | ⏳ | [AslamSys/investimentos-ml-predictor](https://github.com/AslamSys/investimentos-ml-predictor) |
+| **portfolio-manager** | Gestão de portfolio | ⏳ | [AslamSys/investimentos-portfolio-manager](https://github.com/AslamSys/investimentos-portfolio-manager) |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando

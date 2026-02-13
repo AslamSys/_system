@@ -37,11 +37,11 @@ Este hardware executa **6 containers** especializados em pagamentos:
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
 | **pagamentos-brain** | LLM financeiro (Qwen 1.5B) | ⏳ | [AslamSys/pagamentos-brain](https://github.com/AslamSys/pagamentos-brain) |
-| **pix-gateway** | API PIX com Banco Central | ⏳ | [AslamSys/pix-gateway](https://github.com/AslamSys/pix-gateway) |
-| **open-banking** | Integração bancária (Pluggy/Belvo) | ⏳ | [AslamSys/open-banking](https://github.com/AslamSys/open-banking) |
-| **fraud-detector** | Detecção ML de fraudes | ⏳ | [AslamSys/fraud-detector](https://github.com/AslamSys/fraud-detector) |
-| **invoice-generator** | Boletos/NFe/NFSe | ⏳ | [AslamSys/invoice-generator](https://github.com/AslamSys/invoice-generator) |
-| **wallet-integrator** | PicPay, Mercado Pago, PayPal | ⏳ | [AslamSys/wallet-integrator](https://github.com/AslamSys/wallet-integrator) |
+| **pix-gateway** | API PIX com Banco Central | ⏳ | [AslamSys/pagamentos-pix-gateway](https://github.com/AslamSys/pagamentos-pix-gateway) |
+| **open-banking** | Integração bancária (Pluggy/Belvo) | ⏳ | [AslamSys/pagamentos-open-banking](https://github.com/AslamSys/pagamentos-open-banking) |
+| **fraud-detector** | Detecção ML de fraudes | ⏳ | [AslamSys/pagamentos-fraud-detector](https://github.com/AslamSys/pagamentos-fraud-detector) |
+| **invoice-generator** | Boletos/NFe/NFSe | ⏳ | [AslamSys/pagamentos-invoice-generator](https://github.com/AslamSys/pagamentos-invoice-generator) |
+| **wallet-integrator** | PicPay, Mercado Pago, PayPal | ⏳ | [AslamSys/pagamentos-wallet-integrator](https://github.com/AslamSys/pagamentos-wallet-integrator) |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando

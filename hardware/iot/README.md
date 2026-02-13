@@ -130,9 +130,9 @@ Este hardware executa **4 containers** especializados em IoT:
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
 | **iot-orchestrator** | Tradução NATS → MQTT para ESP32 | ✅ | [AslamSys/iot-orchestrator](https://github.com/AslamSys/iot-orchestrator) |
-| **mqtt-broker** | Broker MQTT local (Mosquitto) | ✅ | [AslamSys/mqtt-broker](https://github.com/AslamSys/mqtt-broker) |
+| **mqtt-broker** | Broker MQTT local (Mosquitto) | ✅ | [AslamSys/iot-mqtt-broker](https://github.com/AslamSys/iot-mqtt-broker) |
 | **iot-state-cache** | Cache Redis para estados IoT | ✅ | [AslamSys/iot-state-cache](https://github.com/AslamSys/iot-state-cache) |
-| **bluetooth-scanner** | Presence detection via BLE | ⏳ | [AslamSys/bluetooth-scanner](https://github.com/AslamSys/bluetooth-scanner) |
+| **bluetooth-scanner** | Presence detection via BLE | ⏳ | [AslamSys/iot-bluetooth-scanner](https://github.com/AslamSys/iot-bluetooth-scanner) |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando

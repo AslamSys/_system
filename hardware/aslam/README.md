@@ -69,20 +69,20 @@ Este hardware executa **23 containers** distribuídos em 3 ecossistemas:
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
-| **audio-capture-vad** | Captura de áudio com VAD | ✅ | [AslamSys/audio-capture-vad](https://github.com/AslamSys/audio-capture-vad) |
-| **wake-word-detector** | Detecção de "ASLAM" | ✅ | [AslamSys/wake-word-detector](https://github.com/AslamSys/wake-word-detector) |
-| **speaker-verification** | Autenticação por voz | ✅ | [AslamSys/speaker-verification](https://github.com/AslamSys/speaker-verification) |
-| **whisper-asr** | Speech-to-Text | ✅ | [AslamSys/whisper-asr](https://github.com/AslamSys/whisper-asr) |
-| **speaker-id-diarization** | Identificação de usuário | ⏳ | [AslamSys/speaker-id-diarization](https://github.com/AslamSys/speaker-id-diarization) |
-| **source-separation** | Separação de vozes | ⏳ | [AslamSys/source-separation](https://github.com/AslamSys/source-separation) |
-| **audio-bridge** | WebRTC ↔ NATS streaming | ✅ | [AslamSys/audio-bridge](https://github.com/AslamSys/audio-bridge) |
-| **tts-engine** | Text-to-Speech | ✅ | [AslamSys/tts-engine](https://github.com/AslamSys/tts-engine) |
-| **openclaw-agent** | Comunicação + RPA + Skills | ⏳ | [AslamSys/openclaw-agent](https://github.com/AslamSys/openclaw-agent) |
+| **audio-capture-vad** | Captura de áudio com VAD | ✅ | [AslamSys/mordomo-audio-capture-vad](https://github.com/AslamSys/mordomo-audio-capture-vad) |
+| **wake-word-detector** | Detecção de "ASLAM" | ✅ | [AslamSys/mordomo-wake-word-detector](https://github.com/AslamSys/mordomo-wake-word-detector) |
+| **speaker-verification** | Autenticação por voz | ✅ | [AslamSys/mordomo-speaker-verification](https://github.com/AslamSys/mordomo-speaker-verification) |
+| **whisper-asr** | Speech-to-Text | ✅ | [AslamSys/mordomo-whisper-asr](https://github.com/AslamSys/mordomo-whisper-asr) |
+| **speaker-id-diarization** | Identificação de usuário | ⏳ | [AslamSys/mordomo-speaker-id-diarization](https://github.com/AslamSys/mordomo-speaker-id-diarization) |
+| **source-separation** | Separação de vozes | ⏳ | [AslamSys/mordomo-source-separation](https://github.com/AslamSys/mordomo-source-separation) |
+| **audio-bridge** | WebRTC ↔ NATS streaming | ✅ | [AslamSys/mordomo-audio-bridge](https://github.com/AslamSys/mordomo-audio-bridge) |
+| **tts-engine** | Text-to-Speech | ✅ | [AslamSys/mordomo-tts-engine](https://github.com/AslamSys/mordomo-tts-engine) |
+| **openclaw-agent** | Comunicação + RPA + Skills | ⏳ | [AslamSys/mordomo-openclaw-agent](https://github.com/AslamSys/mordomo-openclaw-agent) |
 | **mordomo-orchestrator** | Estado + Contexto + Dispatcher | ✅ | [AslamSys/mordomo-orchestrator](https://github.com/AslamSys/mordomo-orchestrator) |
 | **mordomo-brain** | LLM + RAG + Reasoning | ⏳ | [AslamSys/mordomo-brain](https://github.com/AslamSys/mordomo-brain) |
-| **system-watchdog** | DEFCON + Thermal protection | ✅ | [AslamSys/system-watchdog](https://github.com/AslamSys/system-watchdog) |
-| **core-gateway** | REST + WebSocket API | ✅ | [AslamSys/core-gateway](https://github.com/AslamSys/core-gateway) |
-| **dashboard-ui** | Interface Canvas A2UI | ⏳ | [AslamSys/dashboard-ui](https://github.com/AslamSys/dashboard-ui) |
+| **system-watchdog** | DEFCON + Thermal protection | ✅ | [AslamSys/mordomo-system-watchdog](https://github.com/AslamSys/mordomo-system-watchdog) |
+| **core-gateway** | REST + WebSocket API | ✅ | [AslamSys/mordomo-core-gateway](https://github.com/AslamSys/mordomo-core-gateway) |
+| **dashboard-ui** | Interface Canvas A2UI | ⏳ | [AslamSys/mordomo-dashboard-ui](https://github.com/AslamSys/mordomo-dashboard-ui) |
 
 ### 🏗️ Ecossistema Infraestrutura (5 containers)
 

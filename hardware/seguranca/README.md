@@ -66,12 +66,12 @@ Este hardware executa **7 containers** especializados em segurança:
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
 | **seguranca-brain** | LLM Vision (Qwen 3B Vision) | ⏳ | [AslamSys/seguranca-brain](https://github.com/AslamSys/seguranca-brain) |
-| **camera-stream-manager** | Gerenciamento de câmeras IP | ⏳ | [AslamSys/camera-stream-manager](https://github.com/AslamSys/camera-stream-manager) |
-| **yolo-detector** | Detecção YOLOv8 (pessoas, objetos) | ⏳ | [AslamSys/yolo-detector](https://github.com/AslamSys/yolo-detector) |
-| **face-recognition** | Reconhecimento facial (FaceNet) | ⏳ | [AslamSys/face-recognition](https://github.com/AslamSys/face-recognition) |
-| **event-analyzer** | Análise de comportamento suspeito | ⏳ | [AslamSys/event-analyzer](https://github.com/AslamSys/event-analyzer) |
-| **alert-manager** | Alertas inteligentes via NATS | ⏳ | [AslamSys/alert-manager](https://github.com/AslamSys/alert-manager) |
-| **storage-manager** | Gravação contínua H.264 NVENC | ⏳ | [AslamSys/storage-manager](https://github.com/AslamSys/storage-manager) |
+| **camera-stream-manager** | Gerenciamento de câmeras IP | ⏳ | [AslamSys/seguranca-camera-stream-manager](https://github.com/AslamSys/seguranca-camera-stream-manager) |
+| **yolo-detector** | Detecção YOLOv8 (pessoas, objetos) | ⏳ | [AslamSys/seguranca-yolo-detector](https://github.com/AslamSys/seguranca-yolo-detector) |
+| **face-recognition** | Reconhecimento facial (FaceNet) | ⏳ | [AslamSys/seguranca-face-recognition](https://github.com/AslamSys/seguranca-face-recognition) |
+| **event-analyzer** | Análise de comportamento suspeito | ⏳ | [AslamSys/seguranca-event-analyzer](https://github.com/AslamSys/seguranca-event-analyzer) |
+| **alert-manager** | Alertas inteligentes via NATS | ⏳ | [AslamSys/seguranca-alert-manager](https://github.com/AslamSys/seguranca-alert-manager) |
+| **storage-manager** | Gravação contínua H.264 NVENC | ⏳ | [AslamSys/seguranca-video-recorder](https://github.com/AslamSys/seguranca-video-recorder) |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando
