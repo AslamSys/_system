@@ -7,8 +7,8 @@ Este projeto é dividido em **3 ecossistemas principais**, cada um com seus cont
 ### 🏠 Mordomo
 Sistema principal de assistente de voz inteligente com processamento de áudio, reconhecimento de fala, LLM, síntese de voz e OpenClaw Agent (comunicação + RPA).
 
-**Componentes:** 14 containers
-- STT (6), TTS (2), Core (5), OpenClaw Agent (1)
+**Componentes:** 16 containers
+- STT (6), TTS (2), Core (7), OpenClaw Agent (1)
 
 **Repositórios:**
 - [mordomo-audio-bridge](https://github.com/AslamSys/mordomo-audio-bridge)
@@ -25,6 +25,8 @@ Sistema principal de assistente de voz inteligente com processamento de áudio, 
 - [mordomo-system-watchdog](https://github.com/AslamSys/mordomo-system-watchdog)
 - [mordomo-dashboard-ui](https://github.com/AslamSys/mordomo-dashboard-ui)
 - [mordomo-openclaw-agent](https://github.com/AslamSys/mordomo-openclaw-agent)
+- [mordomo-action-dispatcher](https://github.com/AslamSys/mordomo-action-dispatcher)
+- [mordomo-skills-runner](https://github.com/AslamSys/mordomo-skills-runner)
 
 ### 🔧 Infraestrutura
 Serviços de base para comunicação, descoberta de serviços e armazenamento de dados.
