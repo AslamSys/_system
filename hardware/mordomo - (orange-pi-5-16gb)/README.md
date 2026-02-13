@@ -55,7 +55,7 @@ Este hardware hospeda **todos os 3 ecossistemas** do assistente de voz Aslam em 
 │  └─ promtail (log collector)                    │
 │                                                 │
 │  Total: 23 containers                           │
-│  Implementados: 7/14 (Mordomo: 50%)             │
+│  📊 Status: Todos em planejamento (📋)           │
 └─────────────────────────────────────────────────┘
 ```
 
