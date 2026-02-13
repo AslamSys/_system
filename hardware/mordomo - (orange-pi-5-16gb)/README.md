@@ -88,20 +88,20 @@ Este hardware executa **23 containers** distribuídos em 3 ecossistemas:
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
-| **nats** | Message broker | 📋 | [AslamSys/nats](https://github.com/AslamSys/nats) |
-| **consul** | Service discovery | 📋 | [AslamSys/consul](https://github.com/AslamSys/consul) |
-| **qdrant** | Vector database (RAG) | 📋 | [AslamSys/qdrant](https://github.com/AslamSys/qdrant) |
-| **postgres** | Banco relacional | 📋 | [AslamSys/postgres](https://github.com/AslamSys/postgres) |
-| **aslam-app** | Tablet interface (React) | 📋 | [AslamSys/aslam-app](https://github.com/AslamSys/aslam-app) |
+| **nats** | Message broker | 📋 | *Repositório aguardando criação* |
+| **consul** | Service discovery | 📋 | *Repositório aguardando criação* |
+| **qdrant** | Vector database (RAG) | 📋 | *Repositório aguardando criação* |
+| **postgres** | Banco relacional | 📋 | *Repositório aguardando criação* |
+| **aslam-app** | Tablet interface (React) | 📋 | *Repositório aguardando criação* |
 
 ### 📊 Ecossistema Monitoramento (4 containers)
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
-| **prometheus** | Coleta de métricas | 📋 | [AslamSys/prometheus](https://github.com/AslamSys/prometheus) |
-| **loki** | Agregação de logs | 📋 | [AslamSys/loki](https://github.com/AslamSys/loki) |
-| **grafana** | Dashboards visuais | 📋 | [AslamSys/grafana](https://github.com/AslamSys/grafana) |
-| **promtail** | Coleta de logs | 📋 | [AslamSys/promtail](https://github.com/AslamSys/promtail) |
+| **prometheus** | Coleta de métricas | 📋 | *Repositório aguardando criação* |
+| **loki** | Agregação de logs | 📋 | *Repositório aguardando criação* |
+| **grafana** | Dashboards visuais | 📋 | *Repositório aguardando criação* |
+| **promtail** | Coleta de logs | 📋 | *Repositório aguardando criação* |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando em produção
