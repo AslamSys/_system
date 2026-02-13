@@ -9,7 +9,6 @@
 - **Armazenamento**: MicroSD 128GB + **HD Externo 2TB USB 3.0**
 - **Rede**: Gigabit Ethernet + Wi-Fi 5
 - **Alimentação**: 5V/5A USB-C (27W)
-- **Preço**: **$80** + periféricos $20 + HD 2TB $65 = **$165 TOTAL**
 
 ## 🎯 Função no Sistema
 

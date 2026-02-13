@@ -12,7 +12,6 @@
 - **Rede**: Gigabit Ethernet (1000 Mbps)
 - **USB**: 2x USB 3.0 (5 Gbps) + 2x USB 2.0
 - **Alimentação**: 5V/5A USB-C (27W)
-- **Preço**: **$80** + 2x HDD 4TB $180 + SSD 1TB NVMe $70 + HAT NVMe $25 = **$355 TOTAL**
 
 ## 🎯 Função no Sistema
 

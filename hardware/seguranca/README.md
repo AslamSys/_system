@@ -12,12 +12,6 @@
 - **USB**: 4x USB 3.2 Gen2
 - **CSI**: 4x MIPI CSI-2 (4 câmeras simultâneas)
 - **Alimentação**: 12V/2A DC Barrel (24W)
-- **Preço**: **$249** (board only)
-
-### Periféricos Necessários
-- **MicroSD 128GB**: $20
-- **Fonte 12V/2A**: $15
-- **Case com dissipador**: $25
 - **Cabo Ethernet Cat6**: $3
 - **TOTAL**: **$312**
 

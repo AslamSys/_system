@@ -9,15 +9,6 @@
 - **USB**: 4x USB 2.0
 - **GPIO**: 40 pinos
 - **Alimentação**: 5V/2.5A via Micro USB (12.5W)
-- **Preço**: **$35** (board only)
-
-### Periféricos Necessários
-- **MicroSD 32GB**: $8
-- **Fonte Micro USB 5V/2.5A**: $10
-- **Case básico com ventilação**: $5
-- **Antena Wi-Fi externa 5dBi**: $12 (alcance 50-100m)
-- **Antena Bluetooth externa 3dBi** (opcional): $10
-- **Cabo Ethernet Cat6**: $3
 - **TOTAL**: **$83** (sem BT) / **$93** (com BT)
 
 ## 🎯 Função no Sistema

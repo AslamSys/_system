@@ -8,7 +8,6 @@
 - **Armazenamento**: MicroSD 128GB
 - **Rede**: Gigabit Ethernet + Wi-Fi 5 + Bluetooth 5.0
 - **Alimentação**: 5V/5A USB-C (27W)
-- **Preço**: **$120** + periféricos $20 = **$140 TOTAL**
 
 ## 🎯 Função no Sistema
 

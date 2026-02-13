@@ -8,7 +8,6 @@
 - **Armazenamento**: MicroSD 64GB
 - **Rede**: Gigabit Ethernet + Wi-Fi 5 + Bluetooth 5.0
 - **Alimentação**: 5V/5A USB-C (27W)
-- **Preço**: **$60** + periféricos $15 = **$75 TOTAL**
 
 ## 🎯 Função no Sistema
 
