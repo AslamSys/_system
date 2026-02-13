@@ -11,20 +11,20 @@ Sistema principal de assistente de voz inteligente com processamento de áudio, 
 - STT (6), TTS (2), Core (5), OpenClaw Agent (1)
 
 **Repositórios:**
-- [aslam-audio-bridge](https://github.com/AslamSys/aslam-audio-bridge)
-- [aslam-audio-capture-vad](https://github.com/AslamSys/aslam-audio-capture-vad)
-- [aslam-wake-word-detector](https://github.com/AslamSys/aslam-wake-word-detector)
-- [aslam-speaker-verification](https://github.com/AslamSys/aslam-speaker-verification)
-- [aslam-whisper-asr](https://github.com/AslamSys/aslam-whisper-asr)
-- [aslam-speaker-id-diarization](https://github.com/AslamSys/aslam-speaker-id-diarization)
-- [aslam-source-separation](https://github.com/AslamSys/aslam-source-separation)
-- [aslam-core-gateway](https://github.com/AslamSys/aslam-core-gateway)
-- [aslam-orchestrator](https://github.com/AslamSys/aslam-orchestrator)
-- [aslam-brain](https://github.com/AslamSys/aslam-brain)
-- [aslam-tts-engine](https://github.com/AslamSys/aslam-tts-engine)
-- [aslam-system-watchdog](https://github.com/AslamSys/aslam-system-watchdog)
-- [aslam-dashboard-ui](https://github.com/AslamSys/aslam-dashboard-ui)
-- [aslam-openclaw-agent](https://github.com/AslamSys/aslam-openclaw-agent)
+- [mordomo-audio-bridge](https://github.com/AslamSys/mordomo-audio-bridge)
+- [mordomo-audio-capture-vad](https://github.com/AslamSys/mordomo-audio-capture-vad)
+- [mordomo-wake-word-detector](https://github.com/AslamSys/mordomo-wake-word-detector)
+- [mordomo-speaker-verification](https://github.com/AslamSys/mordomo-speaker-verification)
+- [mordomo-whisper-asr](https://github.com/AslamSys/mordomo-whisper-asr)
+- [mordomo-speaker-id-diarization](https://github.com/AslamSys/mordomo-speaker-id-diarization)
+- [mordomo-source-separation](https://github.com/AslamSys/mordomo-source-separation)
+- [mordomo-core-gateway](https://github.com/AslamSys/mordomo-core-gateway)
+- [mordomo-orchestrator](https://github.com/AslamSys/mordomo-orchestrator)
+- [mordomo-brain](https://github.com/AslamSys/mordomo-brain)
+- [mordomo-tts-engine](https://github.com/AslamSys/mordomo-tts-engine)
+- [mordomo-system-watchdog](https://github.com/AslamSys/mordomo-system-watchdog)
+- [mordomo-dashboard-ui](https://github.com/AslamSys/mordomo-dashboard-ui)
+- [mordomo-openclaw-agent](https://github.com/AslamSys/mordomo-openclaw-agent)
 
 ### 🔧 Infraestrutura
 Serviços de base para comunicação, descoberta de serviços e armazenamento de dados.
@@ -33,11 +33,7 @@ Serviços de base para comunicação, descoberta de serviços e armazenamento de
 - NATS (message broker), Consul (discovery), Qdrant (vetores), PostgreSQL (persistência), Aslam App (UI)
 
 **Repositórios:**
-- [aslam-nats](https://github.com/AslamSys/aslam-nats)
-- [aslam-consul](https://github.com/AslamSys/aslam-consul)
-- [aslam-qdrant](https://github.com/AslamSys/aslam-qdrant)
-- [aslam-postgres](https://github.com/AslamSys/aslam-postgres)
-- [aslam-app](https://github.com/AslamSys/aslam-app)
+- NATS, Consul, Qdrant, PostgreSQL, Aslam App (configurações em _system)
 
 ### 📊 Monitoramento
 Observabilidade completa do sistema com métricas, logs e dashboards.
@@ -46,10 +42,7 @@ Observabilidade completa do sistema com métricas, logs e dashboards.
 - Prometheus, Grafana, Loki, Promtail
 
 **Repositórios:**
-- [aslam-prometheus](https://github.com/AslamSys/aslam-prometheus)
-- [aslam-grafana](https://github.com/AslamSys/aslam-grafana)
-- [aslam-loki](https://github.com/AslamSys/aslam-loki)
-- [aslam-promtail](https://github.com/AslamSys/aslam-promtail)
+- Prometheus, Grafana, Loki, Promtail (configurações em _system)
 
 ---
 
