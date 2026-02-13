@@ -37,6 +37,14 @@ Módulo responsável por:
 **Total**: 4.1GB RAM / 4GB = **103% uso** ⚠️ (swap 1GB resolve)  
 **CPU**: 335% / 400% = **84% uso** ✅
 
+### Repositórios
+- [pagamentos-brain](https://github.com/AslamSys/pagamentos-brain)
+- [pagamentos-pix-gateway](https://github.com/AslamSys/pagamentos-pix-gateway)
+- [pagamentos-open-banking](https://github.com/AslamSys/pagamentos-open-banking)
+- [pagamentos-fraud-detector](https://github.com/AslamSys/pagamentos-fraud-detector)
+- [pagamentos-invoice-generator](https://github.com/AslamSys/pagamentos-invoice-generator)
+- [pagamentos-wallet-integrator](https://github.com/AslamSys/pagamentos-wallet-integrator)
+
 ## 🔌 Integração NATS
 
 ### Comandos Recebidos

@@ -43,6 +43,15 @@ Módulo responsável por:
 - ml-predictor roda offline (1x/dia à noite)
 - **CPU ajustada**: 450% / 400% = **113% uso** ✅ (picos tolerados)
 
+### Repositórios
+- [investimentos-brain](https://github.com/AslamSys/investimentos-brain)
+- [investimentos-trading-bot](https://github.com/AslamSys/investimentos-trading-bot)
+- [investimentos-technical-analysis](https://github.com/AslamSys/investimentos-technical-analysis)
+- [investimentos-news-sentiment](https://github.com/AslamSys/investimentos-news-sentiment)
+- [investimentos-betting-bot](https://github.com/AslamSys/investimentos-betting-bot)
+- [investimentos-ml-predictor](https://github.com/AslamSys/investimentos-ml-predictor)
+- [investimentos-portfolio-manager](https://github.com/AslamSys/investimentos-portfolio-manager)
+
 ## 🔌 Integração NATS
 
 ### Comandos Recebidos

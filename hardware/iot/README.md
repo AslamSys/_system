@@ -98,6 +98,11 @@ Luz acende em < 150ms total
 | iot-orchestrator | 180MB | 25% | 100MB |
 | mqtt-broker | 100MB | 15% | 50MB |
 | iot-state-cache | 80MB | 10% | 100MB |
+
+### Repositórios
+- [iot-orchestrator](https://github.com/AslamSys/iot-orchestrator)
+- [iot-mqtt-broker](https://github.com/AslamSys/iot-mqtt-broker)
+- [iot-state-cache](https://github.com/AslamSys/iot-state-cache)
 | bluetooth-scanner | 100MB | 20% | 50MB |
 | **TOTAL** | **460MB** | **70%** | **~300MB** |
 

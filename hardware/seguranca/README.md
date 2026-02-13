@@ -98,6 +98,16 @@ Este hardware executa o **Módulo de Segurança**, responsável por:
 #### 7. **storage-manager**
 - Gravação contínua 24/7 (H.264 NVENC)
 - Retenção: 7 dias (eventos), 24h (normal)
+- **Recursos**: 512MB RAM, 60% CPU
+
+### Repositórios
+- [seguranca-brain](https://github.com/AslamSys/seguranca-brain)
+- [seguranca-camera-stream-manager](https://github.com/AslamSys/seguranca-camera-stream-manager)
+- [seguranca-yolo-detector](https://github.com/AslamSys/seguranca-yolo-detector)
+- [seguranca-face-recognition](https://github.com/AslamSys/seguranca-face-recognition)
+- [seguranca-event-analyzer](https://github.com/AslamSys/seguranca-event-analyzer)
+- [seguranca-alert-manager](https://github.com/AslamSys/seguranca-alert-manager)
+- [seguranca-storage-manager](https://github.com/AslamSys/seguranca-storage-manager)
 - Compressão inteligente (motion-based)
 - Exportação de clips
 - **Recursos**: 512MB RAM, 256MB VRAM, 60% CPU
