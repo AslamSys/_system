@@ -61,6 +61,55 @@ Este hardware hospeda **todos os 3 ecossistemas** do assistente de voz Aslam em 
 
 ---
 
+## 📦 Containers e Repositórios
+
+Este hardware executa **23 containers** distribuídos em 3 ecossistemas:
+
+### 🎤 Ecossistema Mordomo (14 containers)
+
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **audio-capture-vad** | Captura de áudio com VAD | ✅ | [AslamSys/audio-capture-vad](https://github.com/AslamSys/audio-capture-vad) |
+| **wake-word-detector** | Detecção de "ASLAM" | ✅ | [AslamSys/wake-word-detector](https://github.com/AslamSys/wake-word-detector) |
+| **speaker-verification** | Autenticação por voz | ✅ | [AslamSys/speaker-verification](https://github.com/AslamSys/speaker-verification) |
+| **whisper-asr** | Speech-to-Text | ✅ | [AslamSys/whisper-asr](https://github.com/AslamSys/whisper-asr) |
+| **speaker-id-diarization** | Identificação de usuário | ⏳ | [AslamSys/speaker-id-diarization](https://github.com/AslamSys/speaker-id-diarization) |
+| **source-separation** | Separação de vozes | ⏳ | [AslamSys/source-separation](https://github.com/AslamSys/source-separation) |
+| **audio-bridge** | WebRTC ↔ NATS streaming | ✅ | [AslamSys/audio-bridge](https://github.com/AslamSys/audio-bridge) |
+| **tts-engine** | Text-to-Speech | ✅ | [AslamSys/tts-engine](https://github.com/AslamSys/tts-engine) |
+| **openclaw-agent** | Comunicação + RPA + Skills | ⏳ | [AslamSys/openclaw-agent](https://github.com/AslamSys/openclaw-agent) |
+| **mordomo-orchestrator** | Estado + Contexto + Dispatcher | ✅ | [AslamSys/mordomo-orchestrator](https://github.com/AslamSys/mordomo-orchestrator) |
+| **mordomo-brain** | LLM + RAG + Reasoning | ⏳ | [AslamSys/mordomo-brain](https://github.com/AslamSys/mordomo-brain) |
+| **system-watchdog** | DEFCON + Thermal protection | ✅ | [AslamSys/system-watchdog](https://github.com/AslamSys/system-watchdog) |
+| **core-gateway** | REST + WebSocket API | ✅ | [AslamSys/core-gateway](https://github.com/AslamSys/core-gateway) |
+| **dashboard-ui** | Interface Canvas A2UI | ⏳ | [AslamSys/dashboard-ui](https://github.com/AslamSys/dashboard-ui) |
+
+### 🏗️ Ecossistema Infraestrutura (5 containers)
+
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **nats** | Message broker | ✅ | [AslamSys/nats](https://github.com/AslamSys/nats) |
+| **consul** | Service discovery | ✅ | [AslamSys/consul](https://github.com/AslamSys/consul) |
+| **qdrant** | Vector database (RAG) | ✅ | [AslamSys/qdrant](https://github.com/AslamSys/qdrant) |
+| **postgres** | Banco relacional | ✅ | [AslamSys/postgres](https://github.com/AslamSys/postgres) |
+| **aslam-app** | Tablet interface (React) | ⏳ | [AslamSys/aslam-app](https://github.com/AslamSys/aslam-app) |
+
+### 📊 Ecossistema Monitoramento (4 containers)
+
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **prometheus** | Coleta de métricas | ✅ | [AslamSys/prometheus](https://github.com/AslamSys/prometheus) |
+| **loki** | Agregação de logs | ✅ | [AslamSys/loki](https://github.com/AslamSys/loki) |
+| **grafana** | Dashboards visuais | ✅ | [AslamSys/grafana](https://github.com/AslamSys/grafana) |
+| **promtail** | Coleta de logs | ✅ | [AslamSys/promtail](https://github.com/AslamSys/promtail) |
+
+**💡 Status:**
+- ✅ **Implementado** - Container funcionando
+- ⏳ **Em desenvolvimento** - Em progresso  
+- 📋 **Especificado** - Documentado, aguardando implementação
+
+---
+
 ## 🎙️ Hardware Físico Conectado
 
 ### Periféricos do Orange Pi 5

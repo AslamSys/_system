@@ -29,17 +29,32 @@ Módulo responsável por:
 - **Função**: Entender comandos ("coloca aquele filme do Tom Hanks no deserto"), recomendar conteúdo
 - **Recursos**: 2.5GB RAM necessária / 8GB disponível = **31% uso** ✅
 
-## 📦 Containers (6 total)
+## 📦 Containers e Repositórios
 
-1. **entretenimento-brain** (Ollama Qwen 1.5B) - 2.5GB RAM, 120% CPU
-2. **media-server** (Jellyfin) - 1.5GB RAM, 100% CPU
-3. **download-manager** (qBittorrent + Jackett) - 512MB RAM, 40% CPU
-4. **media-organizer** (Radarr + Sonarr) - 768MB RAM, 50% CPU
-5. **subtitle-fetcher** (Bazarr) - 256MB RAM, 20% CPU
-6. **streaming-aggregator** (APIs Netflix, Spotify) - 512MB RAM, 30% CPU
+Este hardware executa **6 containers** especializados em entretenimento:
 
-**Total**: 6GB RAM / 8GB = **75% uso** ✅  
-**CPU**: 360% / 400% = **90% uso** ✅
+### 🎬 Ecossistema Entretenimento (6 containers)
+
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **entretenimento-brain** | LLM para mídia (Qwen 1.5B) | ⏳ | [AslamSys/entretenimento-brain](https://github.com/AslamSys/entretenimento-brain) |
+| **media-server** | Servidor Jellyfin | ⏳ | [AslamSys/media-server](https://github.com/AslamSys/media-server) |
+| **download-manager** | qBittorrent + Jackett | ⏳ | [AslamSys/download-manager](https://github.com/AslamSys/download-manager) |
+| **media-organizer** | Radarr + Sonarr | ⏳ | [AslamSys/media-organizer](https://github.com/AslamSys/media-organizer) |
+| **subtitle-fetcher** | Bazarr legendas | ⏳ | [AslamSys/subtitle-fetcher](https://github.com/AslamSys/subtitle-fetcher) |
+| **streaming-aggregator** | APIs Netflix, Spotify | ⏳ | [AslamSys/streaming-aggregator](https://github.com/AslamSys/streaming-aggregator) |
+
+**💡 Status:**
+- ✅ **Implementado** - Container funcionando
+- ⏳ **Em desenvolvimento** - Em progresso
+- 📋 **Especificado** - Documentado, aguardando implementação
+
+**📊 Recursos do Hardware:**
+- **RAM Total**: 6GB / 8GB = **75% uso** ✅ (2GB livres)
+- **CPU Total**: 360% / 400% = **90% uso** ✅
+- **LLM**: Qwen 1.5B Q4_K_M (2.5GB RAM, 120% CPU)
+
+---
 
 ## 🔌 Integração NATS
 

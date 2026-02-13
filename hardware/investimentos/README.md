@@ -28,23 +28,34 @@ Módulo responsável por:
 - **Função**: Análise de notícias financeiras, sentiment analysis, recomendações
 - **Recursos**: 3GB RAM necessária / 16GB disponível = **19% uso** ✅ (sobra muito)
 
-## 📦 Containers (7 total)
+## 📦 Containers e Repositórios
 
-1. **investimentos-brain** (Ollama Qwen 3B) - 3GB RAM, 150% CPU
-2. **stock-trading-bot** (Binance/Bybit/B3) - 2GB RAM, 100% CPU
-3. **technical-analysis** (TA-Lib + pandas) - 3GB RAM, 120% CPU
-4. **news-sentiment** (FinBERT + scraping) - 2.5GB RAM, 80% CPU
-5. **betting-bot** (Bet365/Pinnacle API) - 1GB RAM, 60% CPU
-6. **ml-predictor** (LSTM + LightGBM) - 3GB RAM, 150% CPU
-7. **portfolio-manager** (balanceamento, rebalancing) - 1.5GB RAM, 40% CPU
+Este hardware executa **7 containers** especializados em investimentos:
 
-**Total**: 16GB RAM / 16GB = **100% uso** ⚠️ (limite, mas aceitável)  
-**CPU**: 700% / 400% = **175% uso** ❌ (CPU insuficiente!)
+### 📈 Ecossistema Investimentos (7 containers)
 
-### Ajuste: Reduzir containers simultâneos
-- Executar apenas 4-5 bots ativos por vez
-- ml-predictor roda offline (1x/dia à noite)
-- **CPU ajustada**: 450% / 400% = **113% uso** ✅ (picos tolerados)
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **investimentos-brain** | LLM financeiro (Qwen 3B) | ⏳ | [AslamSys/investimentos-brain](https://github.com/AslamSys/investimentos-brain) |
+| **stock-trading-bot** | Trading automatizado | ⏳ | [AslamSys/stock-trading-bot](https://github.com/AslamSys/stock-trading-bot) |
+| **technical-analysis** | Análise técnica (TA-Lib) | ⏳ | [AslamSys/technical-analysis](https://github.com/AslamSys/technical-analysis) |
+| **news-sentiment** | Sentiment analysis (FinBERT) | ⏳ | [AslamSys/news-sentiment](https://github.com/AslamSys/news-sentiment) |
+| **betting-bot** | Apostas esportivas | ⏳ | [AslamSys/betting-bot](https://github.com/AslamSys/betting-bot) |
+| **ml-predictor** | Machine Learning (LSTM/LightGBM) | ⏳ | [AslamSys/ml-predictor](https://github.com/AslamSys/ml-predictor) |
+| **portfolio-manager** | Gestão de portfolio | ⏳ | [AslamSys/portfolio-manager](https://github.com/AslamSys/portfolio-manager) |
+
+**💡 Status:**
+- ✅ **Implementado** - Container funcionando
+- ⏳ **Em desenvolvimento** - Em progresso
+- 📋 **Especificado** - Documentado, aguardando implementação
+
+**📁 Recursos do Hardware:**
+- **RAM Total**: 16GB / 16GB = **100% uso** ⚠️ (limite, mas aceitável)
+- **CPU Total**: 700% / 400% = **175% uso** ❌ (execução por turnos)
+- **CPU Ajustada**: 450% / 400% = **113% uso** ✅ (4-5 containers ativos)
+- **LLM**: Qwen 3B Q4_K_M (3GB RAM, 150% CPU)
+
+---
 
 ## 🔌 Integração NATS
 

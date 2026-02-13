@@ -34,19 +34,34 @@ Módulo responsável por:
 - **Função**: Organizar arquivos, sugerir categorias, busca semântica ("encontre fotos da praia em 2024")
 - **Recursos**: 2.5GB RAM necessária / 8GB disponível = **31% uso** ✅
 
-## 📦 Containers (8 total)
+## 📦 Containers e Repositórios
 
-1. **nas-brain** (Ollama Qwen 1.5B) - 2.5GB RAM, 120% CPU
-2. **file-sync** (Syncthing) - 512MB RAM, 40% CPU
-3. **photo-backup** (PhotoPrism + iCloud sync) - 1.5GB RAM, 80% CPU
-4. **object-storage** (MinIO S3-compatible) - 1GB RAM, 60% CPU
-5. **deduplication** (Btrfs + rmlint) - 768MB RAM, 50% CPU
-6. **smb-server** (Samba shares) - 384MB RAM, 30% CPU
-7. **backup-manager** (Restic incremental) - 512MB RAM, 40% CPU
-8. **media-indexer** (AI tagging, face recognition) - 1GB RAM, 80% CPU
+Este hardware executa **8 containers** especializados em armazenamento:
 
-**Total**: 8.2GB RAM / 8GB = **103% uso** ⚠️ (swap 1GB resolve)  
-**CPU**: 500% / 400% = **125% uso** ⚠️ (picos tolerados)
+### 💾 Ecossistema NAS (8 containers)
+
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **nas-brain** | LLM para organização (Qwen 1.5B) | ⏳ | [AslamSys/nas-brain](https://github.com/AslamSys/nas-brain) |
+| **file-sync** | Sincronização Syncthing | ⏳ | [AslamSys/file-sync](https://github.com/AslamSys/file-sync) |
+| **photo-backup** | Backup fotos PhotoPrism + iCloud | ⏳ | [AslamSys/photo-backup](https://github.com/AslamSys/photo-backup) |
+| **object-storage** | MinIO S3-compatible | ⏳ | [AslamSys/object-storage](https://github.com/AslamSys/object-storage) |
+| **deduplication** | Deduplicação Btrfs + rmlint | ⏳ | [AslamSys/deduplication](https://github.com/AslamSys/deduplication) |
+| **smb-server** | Compartilhamentos Samba | ⏳ | [AslamSys/smb-server](https://github.com/AslamSys/smb-server) |
+| **backup-manager** | Backup incremental Restic | ⏳ | [AslamSys/backup-manager](https://github.com/AslamSys/backup-manager) |
+| **media-indexer** | AI tagging + reconhecimento facial | ⏳ | [AslamSys/media-indexer](https://github.com/AslamSys/media-indexer) |
+
+**💡 Status:**
+- ✅ **Implementado** - Container funcionando
+- ⏳ **Em desenvolvimento** - Em progresso
+- 📋 **Especificado** - Documentado, aguardando implementação
+
+**📊 Recursos do Hardware:**
+- **RAM Total**: 8.2GB / 8GB = **103% uso** ⚠️ (swap 1GB resolve)
+- **CPU Total**: 500% / 400% = **125% uso** ⚠️ (picos tolerados)
+- **LLM**: Qwen 1.5B Q4_K_M (2.5GB RAM, 120% CPU)
+
+---
 
 ## 🔌 Integração NATS
 

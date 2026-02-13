@@ -28,17 +28,32 @@ Módulo responsável por:
 - **Função**: Interpretar solicitações financeiras, categorizar despesas, gerar relatórios
 - **Recursos**: 2.5GB RAM necessária / 4GB disponível = **62% uso** ✅
 
-## 📦 Containers (6 total)
+## 📦 Containers e Repositórios
 
-1. **pagamentos-brain** (Ollama Qwen 1.5B) - 2.5GB RAM, 120% CPU
-2. **pix-gateway** (API Bacen + PSPs) - 384MB RAM, 40% CPU  
-3. **open-banking** (Pluggy/Belvo integração) - 512MB RAM, 50% CPU
-4. **fraud-detector** (Isolation Forest ML) - 256MB RAM, 60% CPU
-5. **invoice-generator** (Boletos/NFe/NFSe) - 192MB RAM, 30% CPU
-6. **wallet-integrator** (PicPay, MP, PayPal) - 256MB RAM, 35% CPU
+Este hardware executa **6 containers** especializados em pagamentos:
 
-**Total**: 4.1GB RAM / 4GB = **103% uso** ⚠️ (swap 1GB resolve)  
-**CPU**: 335% / 400% = **84% uso** ✅
+### 💳 Ecossistema Pagamentos (6 containers)
+
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **pagamentos-brain** | LLM financeiro (Qwen 1.5B) | ⏳ | [AslamSys/pagamentos-brain](https://github.com/AslamSys/pagamentos-brain) |
+| **pix-gateway** | API PIX com Banco Central | ⏳ | [AslamSys/pix-gateway](https://github.com/AslamSys/pix-gateway) |
+| **open-banking** | Integração bancária (Pluggy/Belvo) | ⏳ | [AslamSys/open-banking](https://github.com/AslamSys/open-banking) |
+| **fraud-detector** | Detecção ML de fraudes | ⏳ | [AslamSys/fraud-detector](https://github.com/AslamSys/fraud-detector) |
+| **invoice-generator** | Boletos/NFe/NFSe | ⏳ | [AslamSys/invoice-generator](https://github.com/AslamSys/invoice-generator) |
+| **wallet-integrator** | PicPay, Mercado Pago, PayPal | ⏳ | [AslamSys/wallet-integrator](https://github.com/AslamSys/wallet-integrator) |
+
+**💡 Status:**
+- ✅ **Implementado** - Container funcionando
+- ⏳ **Em desenvolvimento** - Em progresso
+- 📋 **Especificado** - Documentado, aguardando implementação
+
+**📊 Recursos do Hardware:**
+- **RAM Total**: 4.1GB / 4GB = **103% uso** ⚠️ (swap 1GB resolve)
+- **CPU Total**: 335% / 400% = **84% uso** ✅
+- **LLM**: Qwen 1.5B Q4_K_M (2.5GB RAM, 120% CPU)
+
+---
 
 ## 🔌 Integração NATS
 

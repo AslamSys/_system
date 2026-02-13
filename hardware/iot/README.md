@@ -119,6 +119,32 @@ Luz acende em < 150ms total
 - **CPU**: 70% / 400% = **18% utilizado** ✅ (3.3 cores livres)
 - **Disco**: 300MB / 32GB = **1% utilizado** ✅
 
+---
+
+## 📦 Containers e Repositórios
+
+Este hardware executa **4 containers** especializados em IoT:
+
+### 🌐 Ecossistema IoT (4 containers)
+
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **iot-orchestrator** | Tradução NATS → MQTT para ESP32 | ✅ | [AslamSys/iot-orchestrator](https://github.com/AslamSys/iot-orchestrator) |
+| **mqtt-broker** | Broker MQTT local (Mosquitto) | ✅ | [AslamSys/mqtt-broker](https://github.com/AslamSys/mqtt-broker) |
+| **iot-state-cache** | Cache Redis para estados IoT | ✅ | [AslamSys/iot-state-cache](https://github.com/AslamSys/iot-state-cache) |
+| **bluetooth-scanner** | Presence detection via BLE | ⏳ | [AslamSys/bluetooth-scanner](https://github.com/AslamSys/bluetooth-scanner) |
+
+**💡 Status:**
+- ✅ **Implementado** - Container funcionando
+- ⏳ **Em desenvolvimento** - Em progresso
+- 📋 **Especificado** - Documentado, aguardando implementação
+
+**🔧 Tecnologias:**
+- **MQTT**: Eclipse Mosquitto (broker local)
+- **Cache**: Redis (< 5ms latência)
+- **BLE**: BlueZ + Python (scanning contínuo)
+- **Wi-Fi AP**: hostapd (rede dedicada 10.0.0.x)
+
 ### Por que REMOVEMOS Zigbee2MQTT:
 - ❌ **Custo**: Dongle USB Zigbee ~$25 (economizado)
 - ❌ **Dependência**: Dispositivos prontos caros ($15-20 cada)

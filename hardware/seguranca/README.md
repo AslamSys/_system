@@ -57,7 +57,36 @@ Este hardware executa o **Módulo de Segurança**, responsável por:
 - OCR em placas de carros
 - Classificação de eventos: normal, alerta, emergência
 
-## 📦 Ecossistema: Segurança
+## 📦 Containers e Repositórios
+
+Este hardware executa **7 containers** especializados em segurança:
+
+### 🔒 Ecossistema Segurança (7 containers)
+
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **seguranca-brain** | LLM Vision (Qwen 3B Vision) | ⏳ | [AslamSys/seguranca-brain](https://github.com/AslamSys/seguranca-brain) |
+| **camera-stream-manager** | Gerenciamento de câmeras IP | ⏳ | [AslamSys/camera-stream-manager](https://github.com/AslamSys/camera-stream-manager) |
+| **yolo-detector** | Detecção YOLOv8 (pessoas, objetos) | ⏳ | [AslamSys/yolo-detector](https://github.com/AslamSys/yolo-detector) |
+| **face-recognition** | Reconhecimento facial (FaceNet) | ⏳ | [AslamSys/face-recognition](https://github.com/AslamSys/face-recognition) |
+| **event-analyzer** | Análise de comportamento suspeito | ⏳ | [AslamSys/event-analyzer](https://github.com/AslamSys/event-analyzer) |
+| **alert-manager** | Alertas inteligentes via NATS | ⏳ | [AslamSys/alert-manager](https://github.com/AslamSys/alert-manager) |
+| **storage-manager** | Gravação contínua H.264 NVENC | ⏳ | [AslamSys/storage-manager](https://github.com/AslamSys/storage-manager) |
+
+**💡 Status:**
+- ✅ **Implementado** - Container funcionando
+- ⏳ **Em desenvolvimento** - Em progresso
+- 📋 **Especificado** - Documentado, aguardando implementação
+
+**🚀 Recursos do Hardware:**
+- **RAM Total**: 7.5GB / 8GB = **94% uso** ✅
+- **VRAM Total**: 4.3GB / 4GB = **108% uso** ⚠️ (otimização necessária)
+- **CPU Total**: 640% / 256 cores = **Distribuído por NPU**
+- **LLM**: Qwen 3B Vision Q4_K_M + CLIP (4GB RAM, 2GB VRAM)
+
+---
+
+## 📦 Ecossistema: Segurança (detalhes técnicos)
 
 ### Containers (7 total)
 
