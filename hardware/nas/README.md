@@ -1,5 +1,7 @@
 # Raspberry Pi 5 8GB - Módulo NAS (Network Attached Storage)
 
+> 🗂️ **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [💾 NAS (RPi 5 8GB)](README.md)
+
 ## 📋 Especificações do Hardware
 
 ### Raspberry Pi 5 8GB
@@ -12,6 +14,7 @@
 - **Rede**: Gigabit Ethernet (1000 Mbps)
 - **USB**: 2x USB 3.0 (5 Gbps) + 2x USB 2.0
 - **Alimentação**: 5V/5A USB-C (27W)
+- **Preço**: **$80** + 2x HDD 4TB $180 + SSD 1TB NVMe $70 + HAT NVMe $25 = **$355 TOTAL**
 
 ## 🎯 Função no Sistema
 
@@ -44,16 +47,6 @@ Módulo responsável por:
 
 **Total**: 8.2GB RAM / 8GB = **103% uso** ⚠️ (swap 1GB resolve)  
 **CPU**: 500% / 400% = **125% uso** ⚠️ (picos tolerados)
-
-### Repositórios
-- [nas-brain](https://github.com/AslamSys/nas-brain)
-- [nas-file-sync](https://github.com/AslamSys/nas-file-sync)
-- [nas-photo-backup](https://github.com/AslamSys/nas-photo-backup)
-- [nas-object-storage](https://github.com/AslamSys/nas-object-storage)
-- [nas-deduplication](https://github.com/AslamSys/nas-deduplication)
-- [nas-smb-server](https://github.com/AslamSys/nas-smb-server)
-- [nas-backup-manager](https://github.com/AslamSys/nas-backup-manager)
-- [nas-media-indexer](https://github.com/AslamSys/nas-media-indexer)
 
 ## 🔌 Integração NATS
 

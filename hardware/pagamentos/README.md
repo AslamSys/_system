@@ -1,5 +1,7 @@
 # Raspberry Pi 5 4GB - Módulo de Pagamentos
 
+> 📍 **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [💳 Pagamentos (RPi 5 4GB)](README.md)
+
 ## 📋 Especificações do Hardware
 
 ### Raspberry Pi 5 4GB
@@ -8,6 +10,7 @@
 - **Armazenamento**: MicroSD 64GB
 - **Rede**: Gigabit Ethernet + Wi-Fi 5 + Bluetooth 5.0
 - **Alimentação**: 5V/5A USB-C (27W)
+- **Preço**: **$60** + periféricos $15 = **$75 TOTAL**
 
 ## 🎯 Função no Sistema
 
@@ -36,14 +39,6 @@ Módulo responsável por:
 
 **Total**: 4.1GB RAM / 4GB = **103% uso** ⚠️ (swap 1GB resolve)  
 **CPU**: 335% / 400% = **84% uso** ✅
-
-### Repositórios
-- [pagamentos-brain](https://github.com/AslamSys/pagamentos-brain)
-- [pagamentos-pix-gateway](https://github.com/AslamSys/pagamentos-pix-gateway)
-- [pagamentos-open-banking](https://github.com/AslamSys/pagamentos-open-banking)
-- [pagamentos-fraud-detector](https://github.com/AslamSys/pagamentos-fraud-detector)
-- [pagamentos-invoice-generator](https://github.com/AslamSys/pagamentos-invoice-generator)
-- [pagamentos-wallet-integrator](https://github.com/AslamSys/pagamentos-wallet-integrator)
 
 ## 🔌 Integração NATS
 

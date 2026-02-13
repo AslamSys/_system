@@ -1,5 +1,7 @@
 # Raspberry Pi 5 8GB - Módulo de Entretenimento
 
+> 📍 **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [🎬 Entretenimento (RPi 5 8GB)](README.md)
+
 ## 📋 Especificações do Hardware
 
 ### Raspberry Pi 5 8GB
@@ -9,6 +11,7 @@
 - **Armazenamento**: MicroSD 128GB + **HD Externo 2TB USB 3.0**
 - **Rede**: Gigabit Ethernet + Wi-Fi 5
 - **Alimentação**: 5V/5A USB-C (27W)
+- **Preço**: **$80** + periféricos $20 + HD 2TB $65 = **$165 TOTAL**
 
 ## 🎯 Função no Sistema
 
@@ -37,14 +40,6 @@ Módulo responsável por:
 
 **Total**: 6GB RAM / 8GB = **75% uso** ✅  
 **CPU**: 360% / 400% = **90% uso** ✅
-
-### Repositórios
-- [entretenimento-brain](https://github.com/AslamSys/entretenimento-brain)
-- [entretenimento-media-server](https://github.com/AslamSys/entretenimento-media-server)
-- [entretenimento-radarr-movies](https://github.com/AslamSys/entretenimento-radarr-movies)
-- [entretenimento-sonarr-series](https://github.com/AslamSys/entretenimento-sonarr-series)
-- [entretenimento-bazarr-subtitles](https://github.com/AslamSys/entretenimento-bazarr-subtitles)
-- [entretenimento-streaming-aggregator](https://github.com/AslamSys/entretenimento-streaming-aggregator)
 
 ## 🔌 Integração NATS
 

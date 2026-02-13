@@ -1,5 +1,7 @@
 # Raspberry Pi 5 16GB - Módulo de Investimentos
 
+> 📍 **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [📈 Investimentos (RPi 5 16GB)](README.md)
+
 ## 📋 Especificações do Hardware
 
 ### Raspberry Pi 5 16GB
@@ -8,6 +10,7 @@
 - **Armazenamento**: MicroSD 128GB
 - **Rede**: Gigabit Ethernet + Wi-Fi 5 + Bluetooth 5.0
 - **Alimentação**: 5V/5A USB-C (27W)
+- **Preço**: **$120** + periféricos $20 = **$140 TOTAL**
 
 ## 🎯 Função no Sistema
 
@@ -42,15 +45,6 @@ Módulo responsável por:
 - Executar apenas 4-5 bots ativos por vez
 - ml-predictor roda offline (1x/dia à noite)
 - **CPU ajustada**: 450% / 400% = **113% uso** ✅ (picos tolerados)
-
-### Repositórios
-- [investimentos-brain](https://github.com/AslamSys/investimentos-brain)
-- [investimentos-trading-bot](https://github.com/AslamSys/investimentos-trading-bot)
-- [investimentos-technical-analysis](https://github.com/AslamSys/investimentos-technical-analysis)
-- [investimentos-news-sentiment](https://github.com/AslamSys/investimentos-news-sentiment)
-- [investimentos-betting-bot](https://github.com/AslamSys/investimentos-betting-bot)
-- [investimentos-ml-predictor](https://github.com/AslamSys/investimentos-ml-predictor)
-- [investimentos-portfolio-manager](https://github.com/AslamSys/investimentos-portfolio-manager)
 
 ## 🔌 Integração NATS
 

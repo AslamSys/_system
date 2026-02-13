@@ -1,5 +1,9 @@
 # Raspberry Pi 3B+ - Módulo IoT (ESP32 DIY + Access Point)
 
+> 🗂️ **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [🌐 IoT (RPi 3B+)](README.md)
+
+> 📍 **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [🌐 IoT (Raspberry Pi 3B+)](README.md)
+
 ## 📋 Especificações do Hardware
 
 ### Raspberry Pi 3 Model B+
@@ -9,6 +13,15 @@
 - **USB**: 4x USB 2.0
 - **GPIO**: 40 pinos
 - **Alimentação**: 5V/2.5A via Micro USB (12.5W)
+- **Preço**: **$35** (board only)
+
+### Periféricos Necessários
+- **MicroSD 32GB**: $8
+- **Fonte Micro USB 5V/2.5A**: $10
+- **Case básico com ventilação**: $5
+- **Antena Wi-Fi externa 5dBi**: $12 (alcance 50-100m)
+- **Antena Bluetooth externa 3dBi** (opcional): $10
+- **Cabo Ethernet Cat6**: $3
 - **TOTAL**: **$83** (sem BT) / **$93** (com BT)
 
 ## 🎯 Função no Sistema
@@ -98,11 +111,6 @@ Luz acende em < 150ms total
 | iot-orchestrator | 180MB | 25% | 100MB |
 | mqtt-broker | 100MB | 15% | 50MB |
 | iot-state-cache | 80MB | 10% | 100MB |
-
-### Repositórios
-- [iot-orchestrator](https://github.com/AslamSys/iot-orchestrator)
-- [iot-mqtt-broker](https://github.com/AslamSys/iot-mqtt-broker)
-- [iot-state-cache](https://github.com/AslamSys/iot-state-cache)
 | bluetooth-scanner | 100MB | 20% | 50MB |
 | **TOTAL** | **460MB** | **70%** | **~300MB** |
 

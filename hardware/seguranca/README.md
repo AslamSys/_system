@@ -1,5 +1,7 @@
 # Jetson Orin Nano 8GB - Módulo de Segurança
 
+> 📍 **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [🔒 Segurança (Jetson Orin Nano)](README.md)
+
 ## 📋 Especificações do Hardware
 
 ### NVIDIA Jetson Orin Nano 8GB
@@ -12,6 +14,12 @@
 - **USB**: 4x USB 3.2 Gen2
 - **CSI**: 4x MIPI CSI-2 (4 câmeras simultâneas)
 - **Alimentação**: 12V/2A DC Barrel (24W)
+- **Preço**: **$249** (board only)
+
+### Periféricos Necessários
+- **MicroSD 128GB**: $20
+- **Fonte 12V/2A**: $15
+- **Case com dissipador**: $25
 - **Cabo Ethernet Cat6**: $3
 - **TOTAL**: **$312**
 
@@ -95,19 +103,9 @@ Este hardware executa o **Módulo de Segurança**, responsável por:
 - Snapshots + clips de vídeo
 - **Recursos**: 256MB RAM, 40% CPU
 
-#### 7. **video-recorder**
+#### 7. **storage-manager**
 - Gravação contínua 24/7 (H.264 NVENC)
 - Retenção: 7 dias (eventos), 24h (normal)
-- **Recursos**: 512MB RAM, 60% CPU
-
-### Repositórios
-- [seguranca-brain](https://github.com/AslamSys/seguranca-brain)
-- [seguranca-camera-stream-manager](https://github.com/AslamSys/seguranca-camera-stream-manager)
-- [seguranca-yolo-detector](https://github.com/AslamSys/seguranca-yolo-detector)
-- [seguranca-face-recognition](https://github.com/AslamSys/seguranca-face-recognition)
-- [seguranca-event-analyzer](https://github.com/AslamSys/seguranca-event-analyzer)
-- [seguranca-alert-manager](https://github.com/AslamSys/seguranca-alert-manager)
-- [seguranca-video-recorder](https://github.com/AslamSys/seguranca-video-recorder)
 - Compressão inteligente (motion-based)
 - Exportação de clips
 - **Recursos**: 512MB RAM, 256MB VRAM, 60% CPU
