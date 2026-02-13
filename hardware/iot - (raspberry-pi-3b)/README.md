@@ -2,8 +2,6 @@
 
 > 🗂️ **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [🌐 IoT (RPi 3B+)](README.md)
 
-> 📍 **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [🌐 IoT (Raspberry Pi 3B+)](README.md)
-
 ## 📋 Especificações do Hardware
 
 ### Raspberry Pi 3 Model B+
