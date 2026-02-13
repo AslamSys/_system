@@ -1,0 +1,35 @@
+# Source Separation Service Dependencies
+
+# Audio Processing
+demucs==4.0.1
+numpy>=1.24.0
+scipy>=1.10.0
+soundfile>=0.12.0
+torch>=2.0.0
+torchaudio>=2.0.0
+
+# NATS Messaging
+nats-py>=2.6.0
+asyncio-nats-client>=0.11.4
+
+# Prometheus Metrics
+prometheus-client>=0.19.0
+
+# Configuration
+PyYAML>=6.0
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+
+# Logging
+structlog>=23.1.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+
+# Development
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0

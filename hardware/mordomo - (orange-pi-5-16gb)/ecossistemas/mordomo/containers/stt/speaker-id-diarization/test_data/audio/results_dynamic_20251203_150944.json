@@ -1,0 +1,67 @@
+[
+  {
+    "segment": 1,
+    "start_time": 1.95,
+    "end_time": 5.94,
+    "duration": 3.99,
+    "speaker_id": "user_1",
+    "recognized": true,
+    "confidence": 0.8217856884002686,
+    "similarities": {
+      "user_1": 0.8217856884002686,
+      "user_2": 0.6394946575164795
+    }
+  },
+  {
+    "segment": 2,
+    "start_time": 6.42,
+    "end_time": 7.95,
+    "duration": 1.5300000000000002,
+    "speaker_id": "user_2",
+    "recognized": true,
+    "confidence": 0.7924991846084595,
+    "similarities": {
+      "user_1": 0.6198264956474304,
+      "user_2": 0.7924991846084595
+    }
+  },
+  {
+    "segment": 3,
+    "start_time": 7.98,
+    "end_time": 8.76,
+    "duration": 0.7799999999999994,
+    "speaker_id": "user_2",
+    "recognized": true,
+    "confidence": 0.7051959037780762,
+    "similarities": {
+      "user_1": 0.5361382961273193,
+      "user_2": 0.7051959037780762
+    }
+  },
+  {
+    "segment": 4,
+    "start_time": 9.03,
+    "end_time": 10.41,
+    "duration": 1.3800000000000008,
+    "speaker_id": "user_1",
+    "recognized": true,
+    "confidence": 0.7842671871185303,
+    "similarities": {
+      "user_1": 0.7842671871185303,
+      "user_2": 0.6225355863571167
+    }
+  },
+  {
+    "segment": 5,
+    "start_time": 10.71,
+    "end_time": 11.82,
+    "duration": 1.1099999999999994,
+    "speaker_id": "user_2",
+    "recognized": true,
+    "confidence": 0.8639938831329346,
+    "similarities": {
+      "user_1": 0.6383045315742493,
+      "user_2": 0.8639938831329346
+    }
+  }
+]

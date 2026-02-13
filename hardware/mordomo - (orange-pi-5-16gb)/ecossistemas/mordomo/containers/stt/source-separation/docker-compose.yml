@@ -1,0 +1,69 @@
+# Docker Compose for Source Separation Development
+version: '3.8'
+
+services:
+  # NATS Message Broker
+  nats:
+    image: nats:2.10-alpine
+    ports:
+      - "4222:4222"  # Client connections
+      - "8222:8222"  # HTTP monitoring
+      - "6222:6222"  # Cluster connections
+    command: ["-js", "-m", "8222"]
+    networks:
+      - mordomo
+
+  # Source Separation Service
+  source-separation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"  # Prometheus metrics
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./config:/app/config
+      - ./src:/app/src
+      - ./models:/app/models
+    depends_on:
+      - nats
+    networks:
+      - mordomo
+    restart: unless-stopped
+
+  # Prometheus (optional - for metrics monitoring)
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - mordomo
+
+  # Grafana (optional - for metrics visualization)
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - mordomo
+
+networks:
+  mordomo:
+    driver: bridge
+
+volumes:
+  prometheus_data:
+  grafana_data:

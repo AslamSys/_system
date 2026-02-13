@@ -1,0 +1,32 @@
+audio:
+  device:
+    index: null  # null = usa default, ou especifica número
+    name: "default"
+  
+  capture:
+    sample_rate: 16000
+    channels: 1
+    dtype: int16
+    frames_per_buffer: 480  # 30ms @ 16kHz
+    
+  vad:
+    mode: 3  # 0=Quality, 1=Low Bitrate, 2=Aggressive, 3=Very Aggressive
+    frame_duration_ms: 30
+
+# Processamento de áudio
+processing:
+  agc:
+    enabled: true  # Auto Gain Control - amplifica áudio automaticamente
+    target_level: 3.0  # Multiplica RMS por 3x para compensar microfones baixos
+    
+output:
+  zeromq:
+    endpoint: "tcp://*:5555"
+    topic: "audio.raw"
+    enabled: true
+  
+  console:
+    enabled: true  # Print status no console para debug local
+    
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR

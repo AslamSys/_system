@@ -1,0 +1,2 @@
+# Test dependencies (não incluído no requirements.txt principal)
+sounddevice==0.4.6

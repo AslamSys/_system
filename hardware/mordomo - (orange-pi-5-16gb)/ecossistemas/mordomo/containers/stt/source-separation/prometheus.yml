@@ -1,0 +1,9 @@
+# Prometheus configuration for Source Separation
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'source-separation'
+    static_configs:
+      - targets: ['source-separation:9090']

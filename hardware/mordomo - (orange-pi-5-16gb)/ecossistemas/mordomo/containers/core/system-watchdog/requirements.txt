@@ -1,0 +1,5 @@
+psutil==5.9.8
+docker==7.0.0
+nats-py==2.7.0
+python-dotenv==1.0.0
+asyncio==3.4.3

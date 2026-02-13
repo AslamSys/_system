@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package speaker_id;
+
+// Service for Speaker Identification and Diarization
+service SpeakerIdentifier {
+  rpc DiarizeAudio(DiarizeRequest) returns (DiarizeResponse);
+  rpc DiarizeStream(stream DiarizeRequest) returns (stream DiarizeResponse);
+}
+
+// Request message with audio and transcript
+message DiarizeRequest {
+  bytes audio = 1;              // Raw audio data (16kHz)
+  string transcript = 2;         // Transcription from Whisper ASR
+  int64 timestamp = 3;           // Unix timestamp in milliseconds
+  string conversation_id = 4;    // Conversation context ID
+}
+
+// Response with speaker identification
+message DiarizeResponse {
+  string speaker_id = 1;         // user_1, user_2, or unknown_xxx
+  bool recognized = 2;           // true if found in embeddings database
+  float confidence = 3;          // Cosine similarity (0.0 - 1.0)
+  string text = 4;               // Segment transcript
+  float start_time = 5;          // Start time in seconds
+  float end_time = 6;            // End time in seconds
+  bool overlap_detected = 7;     // Voice overlap detected
+  int64 timestamp = 8;           // Processing timestamp
+  string conversation_id = 9;    // Echo conversation ID
+  repeated SpeakerSegment segments = 10; // Multiple speaker segments
+}
+
+// Individual speaker segment
+message SpeakerSegment {
+  string speaker_id = 1;
+  bool recognized = 2;
+  float confidence = 3;
+  string text = 4;
+  float start_time = 5;
+  float end_time = 6;
+}

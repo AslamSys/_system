@@ -1,0 +1,24 @@
+verification:
+  threshold: 0.75
+  min_audio_duration: 1.0  # segundos
+  max_audio_duration: 3.0
+  
+users:
+  - id: "user_1"
+    name: "Você"
+    embedding_path: "data/embeddings/user_1.npy"
+    
+  - id: "user_2"
+    name: "Esposa"
+    embedding_path: "data/embeddings/user_2.npy"
+
+drift_adaptation:
+  enabled: true
+  update_threshold: 0.85  # Atualiza se muito similar
+  max_updates_per_day: 10
+
+nats:
+  url: "nats://localhost:4222"
+  subscribe: "wake_word.detected"
+  publish_verified: "speaker.verified"
+  publish_rejected: "speaker.rejected"

@@ -1,0 +1,30 @@
+demucs:
+  model: "htdemucs_ft"
+  device: "cpu"
+  shifts: 1
+  overlap: 0.25
+
+processing:
+  max_duration: 5.0  # segundos
+  batch_size: 1
+  num_workers: 2
+
+trigger:
+  min_overlap_duration: 0.5
+  confidence_threshold: 0.6
+
+nats:
+  servers:
+    - "nats://localhost:4222"
+  
+  subjects:
+    input: "audio.overlap_detected"
+    output: "audio.separated"
+  
+  connection:
+    max_reconnect_attempts: 10
+    reconnect_time_wait: 2
+
+metrics:
+  port: 9090
+  enabled: true

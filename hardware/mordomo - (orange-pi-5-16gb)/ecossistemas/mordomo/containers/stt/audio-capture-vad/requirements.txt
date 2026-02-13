@@ -1,0 +1,13 @@
+# Core audio processing
+sounddevice==0.4.6
+webrtcvad==2.0.10
+numpy==1.26.4
+
+# Communication
+pyzmq==25.1.2
+
+# Configuration
+pyyaml==6.0.1
+
+# Optional (para desenvolvimento)
+# pynats==1.1.0  # Comentado por enquanto, adicionar depois

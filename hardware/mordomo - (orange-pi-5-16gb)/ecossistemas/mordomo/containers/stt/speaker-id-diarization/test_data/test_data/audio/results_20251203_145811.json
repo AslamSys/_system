@@ -1,0 +1,57 @@
+[
+  {
+    "start_time": 0.0,
+    "end_time": 2.0,
+    "speaker_id": "user_1",
+    "recognized": true,
+    "confidence": 0.8596686124801636,
+    "similarities": {
+      "user_1": 0.8596686124801636,
+      "user_2": 0.5347059369087219
+    }
+  },
+  {
+    "start_time": 2.0,
+    "end_time": 4.0,
+    "speaker_id": "user_1",
+    "recognized": true,
+    "confidence": 0.813001811504364,
+    "similarities": {
+      "user_1": 0.813001811504364,
+      "user_2": 0.6746830940246582
+    }
+  },
+  {
+    "start_time": 4.0,
+    "end_time": 6.0,
+    "speaker_id": "user_1",
+    "recognized": true,
+    "confidence": 0.8227709531784058,
+    "similarities": {
+      "user_1": 0.8227709531784058,
+      "user_2": 0.6443502306938171
+    }
+  },
+  {
+    "start_time": 6.0,
+    "end_time": 8.0,
+    "speaker_id": "user_1",
+    "recognized": true,
+    "confidence": 0.7937081456184387,
+    "similarities": {
+      "user_1": 0.7937081456184387,
+      "user_2": 0.7588697671890259
+    }
+  },
+  {
+    "start_time": 8.0,
+    "end_time": 10.0,
+    "speaker_id": "user_1",
+    "recognized": true,
+    "confidence": 0.8156799674034119,
+    "similarities": {
+      "user_1": 0.8156799674034119,
+      "user_2": 0.5880150198936462
+    }
+  }
+]

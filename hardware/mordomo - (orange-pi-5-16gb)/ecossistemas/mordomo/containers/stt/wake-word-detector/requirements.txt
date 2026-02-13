@@ -1,0 +1,8 @@
+openwakeword==0.6.0
+pyzmq==26.0.3
+nats-py==2.7.2
+pydantic==2.5.3
+pydantic-settings==2.1.0
+prometheus-client==0.19.0
+onnxruntime==1.16.3
+tflite-runtime==2.14.0

@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  wake-word-detector:
+    build: .
+    container_name: wake-word-detector
+    restart: unless-stopped
+    
+    environment:
+      # OpenWakeWord
+      WAKE_WORD_MODEL_PATH: ${WAKE_WORD_MODEL_PATH:-models/}
+      WAKE_WORD_KEYWORD: ${WAKE_WORD_KEYWORD:-alexa}
+      WAKE_WORD_THRESHOLD: ${WAKE_WORD_THRESHOLD:-0.5}
+      INFERENCE_FRAMEWORK: ${INFERENCE_FRAMEWORK:-onnx}
+      
+      # ZeroMQ
+      ZEROMQ_ENDPOINT: ${ZEROMQ_ENDPOINT:-tcp://audio-capture-vad:5555}
+      ZEROMQ_TOPIC: ${ZEROMQ_TOPIC:-audio.raw}
+      
+      # NATS
+      NATS_URL: ${NATS_URL:-nats://nats:4222}
+      NATS_PUBLISH_SUBJECT: ${NATS_PUBLISH_SUBJECT:-wake_word.detected}
+      NATS_SUBSCRIBE_SUBJECT: ${NATS_SUBSCRIBE_SUBJECT:-conversation.ended}
+      
+      # Audio
+      SAMPLE_RATE: ${SAMPLE_RATE:-16000}
+      FRAME_LENGTH: ${FRAME_LENGTH:-512}
+      
+      # Metrics
+      PROMETHEUS_PORT: ${PROMETHEUS_PORT:-8001}
+      
+      # Suppression
+      MAX_SUPPRESSION_TIMEOUT: ${MAX_SUPPRESSION_TIMEOUT:-60}
+    
+    ports:
+      - "8001:8001"  # Métricas Prometheus
+    
+    networks:
+      - mordomo-network
+    
+    depends_on:
+      - nats
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # NATS para testes locais (pode ser removido se já tiver na infra)
+  nats:
+    image: nats:2.10-alpine
+    container_name: nats
+    ports:
+      - "4222:4222"  # Client connections
+      - "8222:8222"  # HTTP monitoring
+    networks:
+      - mordomo-network
+    command: ["-js", "-m", "8222"]
+
+networks:
+  mordomo-network:
+    driver: bridge

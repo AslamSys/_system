@@ -1,0 +1,6 @@
+resemblyzer
+numpy
+pyyaml
+nats-py
+sounddevice
+scipy

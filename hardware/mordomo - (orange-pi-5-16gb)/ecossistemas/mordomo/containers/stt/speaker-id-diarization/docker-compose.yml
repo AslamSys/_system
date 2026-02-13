@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  speaker-id-diarization:
+    build: .
+    container_name: speaker-id-diarization
+    ports:
+      - "50053:50053"  # gRPC
+      - "8003:8003"    # Prometheus metrics
+    volumes:
+      - ./data/embeddings:/data/embeddings:ro  # Read-Only (compartilhado com Verification)
+      - ./logs:/app/logs
+    environment:
+      - EMBEDDINGS_PATH=/data/embeddings
+      - NATS_URL=nats://nats:4222
+      - GRPC_PORT=50053
+      - METRICS_PORT=8003
+      - LOG_LEVEL=INFO
+      - DIARIZATION_MODEL=pyannote/speaker-diarization-3.1
+      - RECOGNITION_THRESHOLD=0.70
+      - MIN_SPEAKER_DURATION=1.0
+      - MAX_SPEAKERS=3
+      - OVERLAP_DETECTION=true
+    networks:
+      - mordomo
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import grpc; grpc.channel_ready_future(grpc.insecure_channel('localhost:50053')).result(timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  mordomo:
+    external: true
