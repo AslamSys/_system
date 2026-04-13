@@ -1,8 +1,8 @@
-# 🍊 Orange Pi 5 (16GB RAM)
+# 🍊 Orange Pi 5 Ultra (16GB RAM)
 
-> 📍 **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [🎯 Mordomo (Orange Pi 5 16GB)](README.md)
+> 📍 **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [🎯 Mordomo + IoT (Orange Pi 5 Ultra 16GB)](README.md)
 
-**Hardware:** Orange Pi 5  
+**Hardware:** Orange Pi 5 Ultra  
 **RAM:** 16GB LPDDR4/4x  
 **CPU:** Rockchip RK3588S (4x Cortex-A76 @ 2.4GHz + 4x Cortex-A55 @ 1.8GHz)  
 **Arquitetura:** ARM64  
@@ -13,14 +13,14 @@
 
 ## 📋 Visão Geral
 
-Este hardware hospeda **todos os 3 ecossistemas** do assistente de voz Aslam em um único dispositivo auto-contido.
+Este hardware hospeda **todos os 4 ecossistemas** do núcleo do sistema em um único dispositivo auto-contido.
 
 ```
 ┌─────────────────────────────────────────────────┐
-│         Orange Pi 5 (16GB RAM, ARM64)           │
+│         Orange Pi 5 Ultra (16GB RAM, ARM64)       │
 ├─────────────────────────────────────────────────┤
 │                                                 │
-│  📦 Ecossistema MORDOMO (14 containers)         │
+│  📦 Ecossistema MORDOMO (15 containers)         │
 │  🎤 STT (6 containers):                          │
 │  ├─ audio-capture-vad                           │
 │  ├─ wake-word-detector                          │
@@ -34,19 +34,27 @@ Este hardware hospeda **todos os 3 ecossistemas** do assistente de voz Aslam em 
 │  🤖 OPENCLAW (1 container):                      │
 │  └─ openclaw-agent (Gateway + Browser RPA +     │
 │     Skills Hub + Brain Bridge — LLM próprio)    │
-│  🧠 CORE (5 containers):                         │
+│  🧠 CORE (6 containers):                         │
 │  ├─ mordomo-orchestrator (Unified Session+Core) │
 │  ├─ mordomo-brain (LLM + RAG)                   │
 │  ├─ system-watchdog (Thermal + DEFCON)          │
 │  ├─ core-gateway (REST + WebSocket)             │
+│  ├─ skills-runner (Python Sandbox)              │
 │  └─ dashboard-ui                                │
 │                                                 │
-│  🏗️ Ecossistema INFRAESTRUTURA (5 containers)   │
+│  📱 Ecossistema IoT (4 containers)               │
+│  ├─ iot-orchestrator (NATS → MQTT)              │
+│  ├─ mqtt-broker (Mosquitto - ESP32 AP)          │
+│  ├─ iot-state-cache (Redis < 5ms)               │
+│  └─ bluetooth-scanner (BLE presence)            │
+│                                                 │
+│  🏗️ Ecossistema INFRAESTRUTURA (6 containers)   │
 │  ├─ nats (message broker)                       │
 │  ├─ consul (service discovery)                  │
 │  ├─ qdrant (vectors)                            │
 │  ├─ postgres (database)                         │
-│  └─ aslam-app (tablet interface)                │
+│  ├─ aslam-app (tablet interface)                │
+│  └─ llm-gateway (LiteLLM Proxy :4000)           │
 │                                                 │
 │  📊 Ecossistema MONITORAMENTO (4 containers)    │
 │  ├─ prometheus                                  │
@@ -54,7 +62,7 @@ Este hardware hospeda **todos os 3 ecossistemas** do assistente de voz Aslam em 
 │  ├─ grafana                                     │
 │  └─ promtail (log collector)                    │
 │                                                 │
-│  Total: 23 containers                           │
+│  Total: 29 containers                           │
 │  📊 Status: Todos em planejamento (📋)           │
 └─────────────────────────────────────────────────┘
 ```
@@ -63,7 +71,7 @@ Este hardware hospeda **todos os 3 ecossistemas** do assistente de voz Aslam em 
 
 ## 📦 Containers e Repositórios
 
-Este hardware executa **23 containers** distribuídos em 3 ecossistemas:
+Este hardware executa **29 containers** distribuídos em 4 ecossistemas:
 
 ### 🎤 Ecossistema Mordomo (14 containers)
 
@@ -84,6 +92,17 @@ Este hardware executa **23 containers** distribuídos em 3 ecossistemas:
 | **core-gateway** | REST + WebSocket API | 📋 | [AslamSys/mordomo-core-gateway](https://github.com/AslamSys/mordomo-core-gateway) |
 | **dashboard-ui** | Interface Canvas A2UI | 📋 | [AslamSys/mordomo-dashboard-ui](https://github.com/AslamSys/mordomo-dashboard-ui) |
 
+### 📱 Ecossistema IoT (4 containers)
+
+| Container | Função | Status | Repositório |
+|-----------|--------|--------|-------------|
+| **iot-orchestrator** | Tradução NATS → MQTT para ESP32 | 📋 | [AslamSys/iot-orchestrator](https://github.com/AslamSys/iot-orchestrator) |
+| **mqtt-broker** | Broker MQTT local (Mosquitto) | 📋 | [AslamSys/iot-mqtt-broker](https://github.com/AslamSys/iot-mqtt-broker) |
+| **iot-state-cache** | Cache Redis para estados IoT | 📋 | [AslamSys/iot-state-cache](https://github.com/AslamSys/iot-state-cache) |
+| **bluetooth-scanner** | Presence detection via BLE | 📋 | *Repositório aguardando criação* |
+
+_Nota: O Wi-Fi 6 do Orange Pi 5 Ultra opera como **Access Point dedicado** (hostapd + interface virtual) para os dispositivos ESP32 na rede `10.0.0.x`. A conexão com a rede doméstica/internet é feita exclusivamente via **eth0** (Gigabit Ethernet)._
+
 ### 🏗️ Ecossistema Infraestrutura (5 containers)
 
 | Container | Função | Status | Repositório |
@@ -93,6 +112,7 @@ Este hardware executa **23 containers** distribuídos em 3 ecossistemas:
 | **qdrant** | Vector database (RAG) | 📋 | *Repositório aguardando criação* |
 | **postgres** | Banco relacional | 📋 | *Repositório aguardando criação* |
 | **aslam-app** | Tablet interface (React) | 📋 | *Repositório aguardando criação* |
+| **llm-gateway** | LiteLLM Proxy — roteamento LLM cloud/local | 📋 | *Repositório aguardando criação* |
 
 ### 📊 Ecossistema Monitoramento (4 containers)
 
@@ -209,12 +229,12 @@ openclaw-agent:         CPU: 30-50% | RAM: 1.2GB (2.0GB quando browser ativo)
 
 # CORE:
 mordomo-orchestrator:   CPU: 15-20% | RAM: 350MB (Unified: Session+LLM+Cache+Dispatcher+Events)
-mordomo-brain:          CPU: 10-20% | RAM: 500MB (RAG + Advanced reasoning)
+mordomo-brain:          CPU: 5-10%  | RAM: 200MB (RAG + LiteLLM client — sem modelo local)
 system-watchdog:        CPU: <1%    | RAM: 20MB
 core-gateway:           CPU: 5-10%  | RAM: 150MB
 dashboard-ui:           CPU: 2-5%   | RAM: 100MB (Canvas A2UI)
 
-Total Mordomo:          CPU: ~130-235% (1.3-2.4 cores) | RAM: ~3.7GB (4.5GB browser ativo)
+Total Mordomo:          CPU: ~125-225% (1.2-2.2 cores) | RAM: ~3.4GB (4.2GB browser ativo)
 ```
 
 #### 🏗️ Infraestrutura
@@ -224,8 +244,9 @@ consul:                 CPU: 5-10%  | RAM: 100MB
 qdrant:                 CPU: 10-20% | RAM: 500MB
 postgres:               CPU: 5-10%  | RAM: 256MB
 aslam-app:              CPU: 3-5%   | RAM: 50MB
+llm-gateway:            CPU: <2%    | RAM: 100-200MB (LiteLLM Proxy, I/O bound)
 
-Total Infraestrutura:   CPU: ~28-55% | RAM: ~956MB
+Total Infraestrutura:   CPU: ~28-57% | RAM: ~1.1GB
 ```
 
 #### 📊 Monitoramento
@@ -238,20 +259,54 @@ promtail:               CPU: 2-5%   | RAM: 30MB
 Total Monitoramento:    CPU: ~22-40% | RAM: ~880MB
 ```
 
-### 📈 Total Estimado
-
+#### 📱 IoT
 ```yaml
-CPU Total:  180-330% de uso (1.8-3.3 cores de 8 disponíveis)
-RAM Total:  ~5.5GB de 16GB disponíveis (6.3GB browser ativo)
-Storage:    18-33GB (containers + data)
-Network:    Baixo (LAN local, < 10 Mbps)
+iot-orchestrator:       CPU: 5-10%  | RAM: 180MB  (NATS→MQTT bridge, Python)
+mqtt-broker:            CPU: 1-3%   | RAM: 100MB  (Mosquitto, extremamente leve)
+iot-state-cache:        CPU: 1-2%   | RAM: 80MB   (Redis — estados ESP32, TTL 5min)
+bluetooth-scanner:      CPU: 3-5%   | RAM: 100MB  (BlueZ + Python, scan contínuo)
 
-Margem de Segurança:
-  CPU: ✅ Sobra 4.7-6.2 cores (59-78% livre)
-  RAM: ✅ Sobra ~10.5GB (66% livre, 61% com browser)
+Total IoT:              CPU: ~10-20% (0.1-0.2 core) | RAM: ~460MB
 ```
 
-**Conclusão:** ✅ **VIÁVEL** - Orange Pi 5 16GB suporta confortavelmente os 23 containers (14 Mordomo + 5 Infra + 4 Monitor) com ampla margem de RAM
+_Nota: O IoT **não tem IA**. Zero inferência, zero modelo. É puro roteamento de mensagens — NATS↔MQTT — e espelho de estado em Redis._
+
+---
+
+### 📈 Total Consolidado (28 containers)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              RESUMO DE CONSUMO — Orange Pi 5 Ultra              │
+├──────────────────────┬─────────────┬─────────────┬─────────────┤
+│ Ecossistema          │ Containers  │ RAM (idle)  │ RAM (pico)  │
+├──────────────────────┼─────────────┼─────────────┼─────────────┤
+│ 🏠 Mordomo           │ 15          │ ~3.4 GB     │ ~4.2 GB     │
+│ 📱 IoT               │ 4           │ ~460 MB     │ ~460 MB     │
+│ 🔧 Infraestrutura    │ 6           │ ~1.1 GB     │ ~1.1 GB     │
+│ 📊 Monitoramento     │ 4           │ ~880 MB     │ ~1.0 GB     │
+├──────────────────────┼─────────────┼─────────────┼─────────────┤
+│ Subtotal containers  │ 29          │ ~5.9 GB     │ ~6.8 GB     │
+│ OS + Docker runtime  │ —           │ ~1.5 GB     │ ~1.5 GB     │
+├──────────────────────┼─────────────┼─────────────┼─────────────┤
+│ TOTAL                │ —           │ ~7.4 GB     │ ~8.3 GB     │
+│ DISPONÍVEL (16GB)    │ —           │ ~8.6 GB     │ ~7.7 GB     │
+│ MARGEM LIVRE         │ —           │ 54%         │ 48%         │
+└──────────────────────┴─────────────┴─────────────┴─────────────┘
+```
+
+```yaml
+CPU Total (pico):  200-390% (2.0-3.9 cores de 8 disponíveis)
+RAM Total (pico):  ~8.3GB de 16GB
+Storage:           20-35GB (containers + data)
+Margem CPU:        ✅ Sobra 4.1-5.8 cores (51-73% livre)
+Margem RAM:        ✅ Sobra ~7.7GB em idle / ~7.7GB no pico
+```
+
+> **Pico** = browser do openclaw-agent ativo simultaneamente com todos os containers.  
+> O Whisper ASR e o browser são os dois maiores consumidores individuais (~1.5GB e ~2GB respectivamente).
+
+**Conclusão:** ✅ **VIÁVEL** — 29 containers rodam com ~48% de RAM livre mesmo no pico. O `llm-gateway` adiciona apenas ~200MB mas centraliza todo o controle de inferência do sistema.
 
 ---
 
@@ -265,10 +320,11 @@ Whisper ASR:
   VRAM: < 400MB
 
 Brain (LLM):
-  Modelo Primário: Cloud APIs (Claude, GPT-4, Gemini) via LiteLLM
-  Fallback Local: Qwen 2.5 1.5B (quantizado Q4)
-  Framework: LiteLLM + Ollama
-  RAM: ~500MB (local fallback)
+  Estratégia: Cloud APIs exclusivamente via LiteLLM
+  Provedores: Claude (Anthropic), GPT-4 (OpenAI), Gemini (Google)
+  Framework: LiteLLM (abstração unificada)
+  RAM: ~200MB (sem modelo local)
+  Nota: LLM local futura → Jetson Orin Nano Super dedicado (hardware separado)
 
 Speaker Verification:
   Modelo: Resemblyzer (leve)

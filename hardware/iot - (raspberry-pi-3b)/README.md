@@ -1,6 +1,20 @@
-# Raspberry Pi 3B+ - Módulo IoT (ESP32 DIY + Access Point)
+# ~~Raspberry Pi 3B+ - Módulo IoT~~ — ELIMINADO ✅
 
-> 🗂️ **Navegação:** [🏠 Início](../../README.md) > [🔧 Hardware](../README.md) > [🌐 IoT (RPi 3B+)](README.md)
+> ⚠️ **Este hardware foi eliminado da arquitetura.**
+>
+> O ecossistema IoT foi **consolidado no Orange Pi 5 Ultra** (hardware central):
+> - Wi-Fi 6 do Orange Pi opera como Access Point dedicado para ESP32 (hostapd + interface virtual `ap0`)
+> - `eth0` fica para rede doméstica/internet
+> - BT 5.0 do Orange Pi cobre o bluetooth-scanner
+> - 4 containers IoT rodam diretamente no hardware central
+>
+> **Documentação ativa:** [mordomo - (orange-pi-5-ultra-16gb)/ecossistemas/iot/](../mordomo%20-%20(orange-pi-5-16gb)/ecossistemas/iot/README.md)
+>
+> Este diretório mantido apenas como referência histórica.
+
+---
+
+## Referência Histórica
 
 ## 📋 Especificações do Hardware
 

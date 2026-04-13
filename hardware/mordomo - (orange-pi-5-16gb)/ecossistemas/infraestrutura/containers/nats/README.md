@@ -115,6 +115,23 @@ authorization {
         publish: ["audio.>", "brain.>", "tts.>", "discovery.>"]
         subscribe: ["audio.>", "brain.>", "tts.>", "discovery.>"]
       }
+    },
+    {
+      user: "openclaw"
+      password: "$2a$11$..."  # bcrypt hash
+      permissions: {
+        publish: [
+          "iot.device.control.>",        # ✅ Controle direto de dispositivos IoT
+          "iot.scene.activate",           # ✅ Ativar cenas/rotinas IoT
+          "openclaw.response.>",          # ✅ Próprias respostas
+          "mordomo.orchestrator.request"  # ✅ Escalar pro Mordomo quando necessário
+        ]
+        subscribe: [
+          "openclaw.>",       # Recebe respostas e notificações
+          "mordomo.response.>" # Recebe acks do Mordomo
+        ]
+        # 🚫 NÃO autorizado: pagamentos.>, seguranca.alarm.>, investimentos.order.>, sistema.>
+      }
     }
   ]
 }

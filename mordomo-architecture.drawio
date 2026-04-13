@@ -1,0 +1,271 @@
+<mxfile host="65bd71144e">
+    <diagram name="AslamSys — Todos os Ecossistemas" id="0">
+        <mxGraphModel dx="8130" dy="3895" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="6000" pageHeight="3200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="eco_mordomo" value="🎙️  Mordomo — Assistente de Voz Local" style="swimlane;startSize=42;fillColor=#EEF4FF;strokeColor=#3a5fc8;strokeWidth=3;rounded=1;arcSize=2;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="40" width="3200" height="1000" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_stt" value="🎤  STT — Speech-to-Text" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" parent="eco_mordomo" vertex="1">
+                    <mxGeometry x="20" y="60" width="295" height="495" as="geometry"/>
+                </mxCell>
+                <mxCell id="vad" value="audio-capture-vad" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="g_stt" vertex="1" tooltip="Captura audio USB + VAD. Output via ZeroMQ PUB.">
+                    <mxGeometry x="38" y="55" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="wwd" value="wake-word-detector" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="g_stt" vertex="1" tooltip="Detecta wake word ASLAM. Porcupine ou OpenWakeWord.">
+                    <mxGeometry x="38" y="125" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="sv" value="speaker-verification" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="g_stt" vertex="1" tooltip="Verifica se o falante esta autorizado. Gate de seguranca.">
+                    <mxGeometry x="38" y="195" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="wasr" value="whisper-asr" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="g_stt" vertex="1" tooltip="Transcricao audio para texto — Whisper.cpp ARM64.">
+                    <mxGeometry x="38" y="265" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="sid" value="speaker-id-diarization" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="g_stt" vertex="1" tooltip="Identifica e separa multiplos falantes.">
+                    <mxGeometry x="38" y="335" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="ss" value="source-separation" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="g_stt" vertex="1" tooltip="Separa vozes sobrepostas usando Demucs.">
+                    <mxGeometry x="38" y="405" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_tts" value="🔊  TTS — Text-to-Speech" style="swimlane;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;" parent="eco_mordomo" vertex="1">
+                    <mxGeometry x="335" y="60" width="295" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="tts" value="tts-engine" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" parent="g_tts" vertex="1" tooltip="Sintetiza texto em audio PT-BR. Piper local (~100ms) ou Azure Neural.">
+                    <mxGeometry x="38" y="55" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="ab" value="audio-bridge" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" parent="g_tts" vertex="1" tooltip="Reproduz audio TTS no speaker USB. WebSocket para tablet.">
+                    <mxGeometry x="38" y="125" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_vf" value="💡  Visual Feedback" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" parent="eco_mordomo" vertex="1">
+                    <mxGeometry x="1760" y="60" width="295" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="vf" value="visual-feedback" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" parent="g_vf" vertex="1" tooltip="LED Ring WS2812B via GPIO Pin 18. Eventos NATS + sync ZeroMQ/TTS.">
+                    <mxGeometry x="38" y="48" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_core" value="🧠  CORE — Orquestracao + Brain" style="swimlane;startSize=30;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" parent="eco_mordomo" vertex="1">
+                    <mxGeometry x="2080" y="60" width="295" height="575" as="geometry"/>
+                </mxCell>
+                <mxCell id="orch" value="mordomo-orchestrator" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" parent="g_core" vertex="1" tooltip="Cerebro central. LLM cloud-first, cache FAISS, sessoes por falante.">
+                    <mxGeometry x="38" y="50" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="brain" value="mordomo-brain" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" parent="g_core" vertex="1" tooltip="RAG + reasoning. Busca semantica no Qdrant. Memoria longa.">
+                    <mxGeometry x="38" y="125" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="skills" value="skills-runner" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" parent="g_core" vertex="1" tooltip="Executa skills Python em sandbox isolado.">
+                    <mxGeometry x="38" y="200" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="gw" value="core-gateway" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" parent="g_core" vertex="1" tooltip="REST + WebSocket. API para tablet. Rate limiting.">
+                    <mxGeometry x="38" y="275" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="wd" value="system-watchdog" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" parent="g_core" vertex="1" tooltip="Saude dos containers. DEFCON. Protecao termica.">
+                    <mxGeometry x="38" y="350" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="ui" value="dashboard-ui" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" parent="g_core" vertex="1" tooltip="Interface visual no tablet. Transcricoes, status, graficos.">
+                    <mxGeometry x="38" y="425" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="ad" value="action-dispatcher" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" parent="g_core" vertex="1" tooltip="Roteia acoes para modulos externos via NATS. Namespace: modulo.recurso.acao.">
+                    <mxGeometry x="38" y="500" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_oc" value="🐙  OpenClaw Agent" style="swimlane;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=12;" parent="eco_mordomo" vertex="1">
+                    <mxGeometry x="650" y="60" width="295" height="550" as="geometry"/>
+                </mxCell>
+                <mxCell id="oc" value="openclaw-agent" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" parent="g_oc" vertex="1" tooltip="LLM proprio (Gemini Flash / GPT-4o-mini). 4 modulos internos.">
+                    <mxGeometry x="38" y="50" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="oc_gw" value="↳ Gateway" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" parent="g_oc" vertex="1" tooltip="WhatsApp, Telegram, Discord, Email IMAP/SMTP.">
+                    <mxGeometry x="38" y="155" width="220" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="oc_rpa" value="↳ Browser RPA" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" parent="g_oc" vertex="1" tooltip="Playwright headless. Web scraping, formularios, navegacao autonoma.">
+                    <mxGeometry x="38" y="220" width="220" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="oc_sh" value="↳ Skills Hub" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" parent="g_oc" vertex="1" tooltip="Skills focadas em comunicacao e automacao web.">
+                    <mxGeometry x="38" y="285" width="220" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="oc_bb" value="↳ Brain Bridge" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" parent="g_oc" vertex="1" tooltip="Ponte NATS bidirecional com o Orchestrator.">
+                    <mxGeometry x="38" y="350" width="220" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="oc_ext" value="WhatsApp / Telegram / Discord / Email" style="rounded=1;whiteSpace=wrap;fillColor=#ffcccc;strokeColor=#b85450;fontSize=10;fontStyle=2;" parent="g_oc" vertex="1" tooltip="Canais externos de comunicacao.">
+                    <mxGeometry x="38" y="435" width="220" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_infra" value="🏗️  Infraestrutura" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" parent="eco_mordomo" vertex="1">
+                    <mxGeometry x="965" y="60" width="775" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="nats" value="NATS" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="g_infra" vertex="1" tooltip="Message broker central. Pub/Sub, Request/Reply, JetStream. Porta 4222.">
+                    <mxGeometry x="20" y="65" width="125" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="redis" value="Redis" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="g_infra" vertex="1" tooltip="Cache de sessoes, rate limiting, circuit breaker. Porta 6379.">
+                    <mxGeometry x="165" y="65" width="125" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="pg" value="PostgreSQL" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="g_infra" vertex="1" tooltip="Persistencia relacional. Conversas, usuarios, perfis de voz. Porta 5432.">
+                    <mxGeometry x="310" y="65" width="125" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="qdrant" value="Qdrant" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="g_infra" vertex="1" tooltip="Vector DB para RAG. Embeddings de conversas. Porta 6333.">
+                    <mxGeometry x="455" y="65" width="125" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="consul" value="Consul" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" parent="g_infra" vertex="1" tooltip="Service discovery. Registro e descoberta de servicos. Porta 8500.">
+                    <mxGeometry x="600" y="65" width="125" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_mon" value="📊  Monitoramento" style="swimlane;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=12;" parent="eco_mordomo" vertex="1">
+                    <mxGeometry x="2400" y="62.5" width="775" height="155" as="geometry"/>
+                </mxCell>
+                <mxCell id="prom" value="Prometheus" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" parent="g_mon" vertex="1" tooltip="Coleta metricas via /metrics. Porta 9090.">
+                    <mxGeometry x="20" y="60" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="loki" value="Loki" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" parent="g_mon" vertex="1" tooltip="Agregacao de logs via Promtail.">
+                    <mxGeometry x="255" y="60" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="graf" value="Grafana" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" parent="g_mon" vertex="1" tooltip="Dashboards visuais. Prometheus + Loki. Porta 3000.">
+                    <mxGeometry x="490" y="60" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="eco_iot" value="📱  IoT — Internet das Coisas" style="swimlane;startSize=42;fillColor=#E8F5E9;strokeColor=#00897b;strokeWidth=3;rounded=1;arcSize=2;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="1290" width="380" height="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_iot" value="IoT" style="swimlane;startSize=28;fillColor=#d5e8d4;strokeColor=#00897b;fontStyle=1;fontSize=12;" parent="eco_iot" vertex="1">
+                    <mxGeometry x="20" y="58" width="335" height="285" as="geometry"/>
+                </mxCell>
+                <mxCell id="iot_orch" value="iot-orchestrator" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#00897b;fontStyle=1;" parent="g_iot" vertex="1" tooltip="Orquestra dispositivos IoT. Recebe acoes do Action Dispatcher via NATS.">
+                    <mxGeometry x="35" y="50" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="iot_mqtt" value="iot-mqtt-broker" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#00897b;fontStyle=1;" parent="g_iot" vertex="1" tooltip="Broker MQTT para dispositivos fisicos. Bridge MQTT → NATS.">
+                    <mxGeometry x="35" y="130" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="iot_cache" value="iot-state-cache" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#00897b;fontStyle=1;" parent="g_iot" vertex="1" tooltip="Cache do estado atual de todos os dispositivos IoT.">
+                    <mxGeometry x="35" y="207" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="eco_seg" value="🛡️  Seguranca — Camera e Deteccao" style="swimlane;startSize=42;fillColor=#FFEBEE;strokeColor=#c62828;strokeWidth=3;rounded=1;arcSize=2;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="1330" width="380" height="660" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_seg" value="Seguranca" style="swimlane;startSize=28;fillColor=#f8cecc;strokeColor=#c62828;fontStyle=1;fontSize=12;" parent="eco_seg" vertex="1">
+                    <mxGeometry x="20" y="58" width="335" height="570" as="geometry"/>
+                </mxCell>
+                <mxCell id="seg_brain" value="seguranca-brain" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#c62828;fontStyle=1;" parent="g_seg" vertex="1" tooltip="Cerebro de seguranca. Coordena deteccao, alertas e gravacao.">
+                    <mxGeometry x="35" y="50" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="seg_cam" value="camera-stream-manager" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#c62828;fontStyle=1;" parent="g_seg" vertex="1" tooltip="Gerencia streams de cameras. RTSP/HLS. Distribuicao para detectores.">
+                    <mxGeometry x="35" y="130" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="seg_yolo" value="yolo-detector" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#c62828;fontStyle=1;" parent="g_seg" vertex="1" tooltip="Deteccao de objetos e pessoas via YOLO. Tempo real.">
+                    <mxGeometry x="35" y="208" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="seg_face" value="face-recognition" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#c62828;fontStyle=1;" parent="g_seg" vertex="1" tooltip="Reconhecimento facial para identificar pessoas conhecidas/desconhecidas.">
+                    <mxGeometry x="35" y="286" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="seg_evt" value="event-analyzer" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#c62828;fontStyle=1;" parent="g_seg" vertex="1" tooltip="Analisa eventos de deteccao e determina nivel de ameaca.">
+                    <mxGeometry x="35" y="364" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="seg_alert" value="alert-manager" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#c62828;fontStyle=1;" parent="g_seg" vertex="1" tooltip="Dispara alertas via NATS, notificacoes push, WhatsApp.">
+                    <mxGeometry x="35" y="442" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="seg_rec" value="video-recorder" style="rounded=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#c62828;fontStyle=1;" parent="g_seg" vertex="1" tooltip="Gravacao de video on-demand ou continua. Armazenamento no NAS.">
+                    <mxGeometry x="35" y="490" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="eco_pag" value="💳  Pagamentos — PIX e Open Banking" style="swimlane;startSize=42;fillColor=#FFFDE7;strokeColor=#f57f17;strokeWidth=3;rounded=1;arcSize=2;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="1460" y="1315" width="380" height="590" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_pag" value="Pagamentos" style="swimlane;startSize=28;fillColor=#fff2cc;strokeColor=#f57f17;fontStyle=1;fontSize=12;" parent="eco_pag" vertex="1">
+                    <mxGeometry x="20" y="58" width="335" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="pag_brain" value="pagamentos-brain" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#f57f17;fontStyle=1;" parent="g_pag" vertex="1" tooltip="Cerebro de pagamentos. Coordena transacoes e validacoes.">
+                    <mxGeometry x="35" y="50" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="pag_pix" value="pix-gateway" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#f57f17;fontStyle=1;" parent="g_pag" vertex="1" tooltip="Integracao com API PIX BACEN. QR Code, chaves, webhooks.">
+                    <mxGeometry x="35" y="128" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="pag_ob" value="open-banking" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#f57f17;fontStyle=1;" parent="g_pag" vertex="1" tooltip="Integracao com Open Finance BR. Consulta saldos e extratos.">
+                    <mxGeometry x="35" y="206" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="pag_fraud" value="fraud-detector" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#f57f17;fontStyle=1;" parent="g_pag" vertex="1" tooltip="Deteccao de fraude em tempo real via ML.">
+                    <mxGeometry x="35" y="284" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="pag_inv" value="invoice-generator" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#f57f17;fontStyle=1;" parent="g_pag" vertex="1" tooltip="Gera boletos, NF e comprovantes.">
+                    <mxGeometry x="35" y="362" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="pag_wallet" value="wallet-integrator" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#f57f17;fontStyle=1;" parent="g_pag" vertex="1" tooltip="Integracao com carteiras digitais (Mercado Pago, PicPay, etc).">
+                    <mxGeometry x="35" y="420" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="eco_inv" value="📈  Investimentos — Trading e Analise" style="swimlane;startSize=42;fillColor=#E8F5E9;strokeColor=#2e7d32;strokeWidth=3;rounded=1;arcSize=2;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="2180" y="1280" width="380" height="660" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_inv" value="Investimentos" style="swimlane;startSize=28;fillColor=#d5e8d4;strokeColor=#2e7d32;fontStyle=1;fontSize=12;" parent="eco_inv" vertex="1">
+                    <mxGeometry x="20" y="58" width="335" height="571" as="geometry"/>
+                </mxCell>
+                <mxCell id="inv_brain" value="investimentos-brain" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#2e7d32;fontStyle=1;" parent="g_inv" vertex="1" tooltip="Cerebro de investimentos. Coordena bots, analise e portfolio.">
+                    <mxGeometry x="35" y="50" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="inv_bot" value="trading-bot" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#2e7d32;fontStyle=1;" parent="g_inv" vertex="1" tooltip="Executa ordens no mercado via API das corretoras.">
+                    <mxGeometry x="35" y="128" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="inv_ta" value="technical-analysis" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#2e7d32;fontStyle=1;" parent="g_inv" vertex="1" tooltip="Calcula indicadores tecnicos: RSI, MACD, Bollinger, etc.">
+                    <mxGeometry x="35" y="206" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="inv_news" value="news-sentiment" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#2e7d32;fontStyle=1;" parent="g_inv" vertex="1" tooltip="Analise de sentimento de noticias financeiras via NLP.">
+                    <mxGeometry x="35" y="284" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="inv_bet" value="betting-bot" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#2e7d32;fontStyle=1;" parent="g_inv" vertex="1" tooltip="Bot de apostas esportivas com estrategias baseadas em ML.">
+                    <mxGeometry x="35" y="362" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="inv_ml" value="ml-predictor" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#2e7d32;fontStyle=1;" parent="g_inv" vertex="1" tooltip="Modelos de ML para predicao de preco e probabilidade de eventos.">
+                    <mxGeometry x="35" y="440" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="inv_port" value="portfolio-manager" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#2e7d32;fontStyle=1;" parent="g_inv" vertex="1" tooltip="Gerencia alocacao de ativos, rebalanceamento e P&amp;L.">
+                    <mxGeometry x="35" y="490" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="eco_ent" value="🎬  Entretenimento — Media e Streaming" style="swimlane;startSize=42;fillColor=#F3E5F5;strokeColor=#6a1b9a;strokeWidth=3;rounded=1;arcSize=2;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="3580" y="1330" width="380" height="590" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_ent" value="Entretenimento" style="swimlane;startSize=28;fillColor=#e1d5e7;strokeColor=#6a1b9a;fontStyle=1;fontSize=12;" parent="eco_ent" vertex="1">
+                    <mxGeometry x="20" y="58" width="335" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="ent_brain" value="entretenimento-brain" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#6a1b9a;fontStyle=1;" parent="g_ent" vertex="1" tooltip="Cerebro de entretenimento. Coordena downloads, busca e reproducao.">
+                    <mxGeometry x="35" y="50" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="ent_media" value="media-server" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#6a1b9a;fontStyle=1;" parent="g_ent" vertex="1" tooltip="Servidor de midia (Jellyfin/Plex). Streaming local e remoto.">
+                    <mxGeometry x="35" y="128" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="ent_radar" value="radarr-movies" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#6a1b9a;fontStyle=1;" parent="g_ent" vertex="1" tooltip="Gerencia downloads automaticos de filmes via Radarr.">
+                    <mxGeometry x="35" y="206" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="ent_sonarr" value="sonarr-series" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#6a1b9a;fontStyle=1;" parent="g_ent" vertex="1" tooltip="Gerencia downloads automaticos de series via Sonarr.">
+                    <mxGeometry x="35" y="284" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="ent_baz" value="bazarr-subtitles" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#6a1b9a;fontStyle=1;" parent="g_ent" vertex="1" tooltip="Download automatico de legendas via Bazarr.">
+                    <mxGeometry x="35" y="362" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="ent_stream" value="streaming-aggregator" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#6a1b9a;fontStyle=1;" parent="g_ent" vertex="1" tooltip="Agrega catalogo de Netflix, Prime, Disney+, etc.">
+                    <mxGeometry x="35" y="420" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="eco_nas" value="💾  NAS — Armazenamento em Rede" style="swimlane;startSize=42;fillColor=#E3F2FD;strokeColor=#1565c0;strokeWidth=3;rounded=1;arcSize=2;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="2820" y="1340" width="380" height="740" as="geometry"/>
+                </mxCell>
+                <mxCell id="g_nas" value="NAS" style="swimlane;startSize=28;fillColor=#dae8fc;strokeColor=#1565c0;fontStyle=1;fontSize=12;" parent="eco_nas" vertex="1">
+                    <mxGeometry x="20" y="58" width="335" height="650" as="geometry"/>
+                </mxCell>
+                <mxCell id="nas_brain" value="nas-brain" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#1565c0;fontStyle=1;" parent="g_nas" vertex="1" tooltip="Cerebro do NAS. Coordena backup, sincronizacao e indexacao.">
+                    <mxGeometry x="35" y="50" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="nas_sync" value="file-sync" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#1565c0;fontStyle=1;" parent="g_nas" vertex="1" tooltip="Sincronizacao de arquivos entre dispositivos e o NAS.">
+                    <mxGeometry x="35" y="128" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="nas_photo" value="photo-backup" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#1565c0;fontStyle=1;" parent="g_nas" vertex="1" tooltip="Backup automatico de fotos dos celulares.">
+                    <mxGeometry x="35" y="206" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="nas_obj" value="object-storage" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#1565c0;fontStyle=1;" parent="g_nas" vertex="1" tooltip="Storage S3-compativel (MinIO). Para backups de containers.">
+                    <mxGeometry x="35" y="284" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="nas_dedup" value="deduplication" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#1565c0;fontStyle=1;" parent="g_nas" vertex="1" tooltip="Detecta e remove arquivos duplicados. Economiza espaco.">
+                    <mxGeometry x="35" y="362" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="nas_smb" value="smb-server" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#1565c0;fontStyle=1;" parent="g_nas" vertex="1" tooltip="Servidor Samba. Compartilha pastas na rede local.">
+                    <mxGeometry x="35" y="440" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="nas_bkp" value="backup-manager" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#1565c0;fontStyle=1;" parent="g_nas" vertex="1" tooltip="Agendamento e execucao de backups. Politicas de retencao.">
+                    <mxGeometry x="35" y="518" width="265" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="nas_idx" value="media-indexer" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#1565c0;fontStyle=1;" parent="g_nas" vertex="1" tooltip="Indexa midia do NAS para busca rapida e integracao com media-server.">
+                    <mxGeometry x="35" y="570" width="265" height="55" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

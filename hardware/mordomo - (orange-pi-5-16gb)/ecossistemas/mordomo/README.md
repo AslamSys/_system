@@ -23,6 +23,9 @@ ecossistemas/mordomo/containers/
 │  ├─ tts-engine/                  ✅ Implementado
 │  └─ audio-bridge/                ✅ Especificado (Rust)
 │
+├─ 💡 visual-feedback/              (1 container - LED Ring WS2812B)
+│  └─ visual-feedback/             📋 Especificado (Feedback sensorial via GPIO)
+│
 ├─ 🤖 openclaw/                     (1 container - OpenClaw Agent)
 │  └─ openclaw-agent               ⏳ Especificado (Gateway + Browser RPA + Skills + NATS Bridge)
 │
@@ -34,7 +37,7 @@ ecossistemas/mordomo/containers/
    ├─ core-gateway/                ⏳ Pendente
    └─ dashboard-ui/                ⏳ Pendente (Canvas A2UI)
 
-Total: 14 containers | Implementados: 7/14 (50%)
+Total: 15 containers | Implementados: 7/15 (47%)
 
 NOTAS:
 - action-dispatcher foi integrado ao mordomo-orchestrator
@@ -45,6 +48,7 @@ NOTAS:
 **📖 Documentação por Ambiente:**
 - [🎤 STT - Speech-to-Text](./containers/stt/README.md)
 - [🔊 TTS - Text-to-Speech](./containers/tts/README.md)
+- [💡 Visual Feedback - LED Ring WS2812B](./containers/visual-feedback/README.md)
 - [🤖 OpenClaw Agent - Comunicação + RPA](./containers/openclaw/README.md)
 - [🧠 CORE - Orquestração + Brain](./containers/core/README.md)
 

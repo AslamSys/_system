@@ -23,11 +23,14 @@ Módulo responsável por:
 - Controle de TV/Som (HDMI-CEC, IR blaster)
 - Recomendações personalizadas (ML)
 
-## 🧠 LLM - Qwen 1.5B Q4_K_M
+## 🧠 LLM — Cloud API via LiteLLM
 
-- **Modelo**: 1.5B parâmetros, 0.9GB VRAM
-- **Função**: Entender comandos ("coloca aquele filme do Tom Hanks no deserto"), recomendar conteúdo
-- **Recursos**: 2.5GB RAM necessária / 8GB disponível = **31% uso** ✅
+- **Estratégia**: Cloud API exclusivamente (Claude, Gemini Flash)
+- **Framework**: LiteLLM (abstração unificada entre provedores)
+- **Função**: Interpretar comandos vagos e recomendar conteúdo
+- **Recursos**: ~150MB RAM — nenhum modelo rodando localmente
+
+> LLM local futura, se necessário: Jetson Orin Nano Super dedicado ($249), compartilhado por todos os módulos via API.
 
 ## 📦 Containers e Repositórios
 
@@ -37,7 +40,7 @@ Este hardware executa **6 containers** especializados em entretenimento:
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
-| **entretenimento-brain** | LLM para mídia (Qwen 1.5B) | 📋 | [AslamSys/entretenimento-brain](https://github.com/AslamSys/entretenimento-brain) |
+| **entretenimento-brain** | LLM para mídia (Cloud API) | 📋 | [AslamSys/entretenimento-brain](https://github.com/AslamSys/entretenimento-brain) |
 | **media-server** | Servidor Jellyfin | 📋 | [AslamSys/entretenimento-media-server](https://github.com/AslamSys/entretenimento-media-server) |
 | **download-manager** | qBittorrent + Jackett | 📋 | [AslamSys/entretenimento-download-manager](https://github.com/AslamSys/entretenimento-download-manager) |
 | **media-organizer** | Radarr + Sonarr | 📋 | [AslamSys/entretenimento-radarr-movies](https://github.com/AslamSys/entretenimento-radarr-movies) |
@@ -51,14 +54,28 @@ Este hardware executa **6 containers** especializados em entretenimento:
 
 **📊 Fase atual:** Todos os containers estão em **fase de estudo/planejamento** (📋)
 
-**📊 Recursos do Hardware:**
-- **RAM Total**: 6GB / 8GB = **75% uso** ✅ (2GB livres)
-- **CPU Total**: 360% / 400% = **90% uso** ✅
-- **LLM**: Qwen 1.5B Q4_K_M (2.5GB RAM, 120% CPU)
+**📊 Recursos do Hardware (recalculado):**
+- **RAM Total**: ~3.2GB / 8GB = **40% uso** ✅✅ (4.8GB livres — benefício direto de remover Ollama local)
+- **CPU Total**: 200% / 400% = **50% uso** ✅
+- **LLM**: Cloud API via LiteLLM (zero RAM local para modelo)
 
----
+## 📊 Análise de Recursos
 
-## 🔌 Integração NATS
+```yaml
+entretenimento-brain:    CPU: 5-15%   | RAM: 150MB   (LiteLLM client)
+media-server (Jellyfin): CPU: 30-80%  | RAM: 1.5GB   (transcoding + biblioteca)
+download-manager:        CPU: 10-20%  | RAM: 500MB   (qBittorrent + Jackett)
+media-organizer:         CPU: 5-10%   | RAM: 400MB   (Radarr + Sonarr)
+subtitle-fetcher:        CPU: 3-5%    | RAM: 200MB   (Bazarr)
+streaming-aggregator:    CPU: 5-10%   | RAM: 200MB   (APIs Netflix, Spotify)
+
+Total:                   CPU: ~60-140% (0.6-1.4 cores) | RAM: ~3.0GB
+OS + Docker runtime:     RAM: ~500MB
+TOTAL:                   ~3.5GB / 8GB = 44% ✅
+MARGEM LIVRE:            ~4.5GB (56%)
+```
+
+> **Comparativo anterior (com Ollama):** 6GB / 8GB = 75%. Remover o modelo local libertou **2.5GB** de RAM.
 
 ### Comandos Recebidos
 ```
@@ -234,17 +251,19 @@ version: '3.8'
 
 services:
   entretenimento-brain:
-    image: ollama/ollama:latest
+    image: python:3.11-slim
     container_name: entretenimento-brain
-    volumes:
-      - ./models:/root/.ollama
+    environment:
+      - LITELLM_API_KEY=${LITELLM_API_KEY}
+      - LITELLM_MODEL=claude-3-haiku-20240307
+      - NATS_URL=nats://nats:4222
     networks:
       - entretenimento-net
     deploy:
       resources:
         limits:
-          memory: 2.5G
-          cpus: '1.2'
+          memory: 200M
+          cpus: '0.3'
     restart: unless-stopped
 
   media-server:

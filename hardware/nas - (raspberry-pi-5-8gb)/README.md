@@ -28,11 +28,14 @@ Módulo responsável por:
 - Backup incremental automático
 - Galeria de fotos com AI (reconhecimento facial, tags)
 
-## 🧠 LLM - Qwen 1.5B Q4_K_M
+## 🧠 LLM — Cloud API via LiteLLM
 
-- **Modelo**: 1.5B parâmetros, 0.9GB VRAM
-- **Função**: Organizar arquivos, sugerir categorias, busca semântica ("encontre fotos da praia em 2024")
-- **Recursos**: 2.5GB RAM necessária / 8GB disponível = **31% uso** ✅
+- **Estratégia**: Cloud API exclusivamente (Claude, Gemini Flash)
+- **Framework**: LiteLLM
+- **Função**: Organizar arquivos, busca semântica ("encontre fotos da praia em 2024")
+- **Recursos**: ~150MB RAM — nenhum modelo rodando localmente
+
+> LLM local futura, se necessário: Jetson Orin Nano Super dedicado ($249), compartilhado por todos os módulos via API.
 
 ## 📦 Containers e Repositórios
 
@@ -42,7 +45,7 @@ Este hardware executa **8 containers** especializados em armazenamento:
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
-| **nas-brain** | LLM para organização (Qwen 1.5B) | 📋 | [AslamSys/nas-brain](https://github.com/AslamSys/nas-brain) |
+| **nas-brain** | LLM para organização (Cloud API) | 📋 | [AslamSys/nas-brain](https://github.com/AslamSys/nas-brain) |
 | **file-sync** | Sincronização Syncthing | 📋 | [AslamSys/nas-file-sync](https://github.com/AslamSys/nas-file-sync) |
 | **photo-backup** | Backup fotos PhotoPrism + iCloud | 📋 | [AslamSys/nas-photo-backup](https://github.com/AslamSys/nas-photo-backup) |
 | **object-storage** | MinIO S3-compatible | 📋 | [AslamSys/nas-object-storage](https://github.com/AslamSys/nas-object-storage) |
@@ -58,10 +61,31 @@ Este hardware executa **8 containers** especializados em armazenamento:
 
 **📊 Fase atual:** Todos os containers estão em **fase de estudo/planejamento** (📋)
 
-**📊 Recursos do Hardware:**
-- **RAM Total**: 8.2GB / 8GB = **103% uso** ⚠️ (swap 1GB resolve)
-- **CPU Total**: 500% / 400% = **125% uso** ⚠️ (picos tolerados)
-- **LLM**: Qwen 1.5B Q4_K_M (2.5GB RAM, 120% CPU)
+**📊 Recursos do Hardware (recalculado):**
+- **RAM Total**: ~2.6GB / 8GB = **32% uso** ✅✅ (5.4GB livres — benefício direto de remover Ollama local)
+- **CPU Total**: 200% / 400% = **50% uso** ✅
+- **LLM**: Cloud API via LiteLLM (zero RAM local para modelo)
+
+## 📊 Análise de Recursos
+
+```yaml
+nas-brain:               CPU: 3-8%    | RAM: 150MB   (LiteLLM client)
+file-sync (Syncthing):   CPU: 5-15%   | RAM: 200MB
+photo-backup (PhotoPrism): CPU: 20-40% | RAM: 800MB  (AI indexing, face rec)
+object-storage (MinIO):  CPU: 3-8%    | RAM: 300MB
+deduplication:           CPU: 5-15%   | RAM: 200MB
+smb-server (Samba):      CPU: 2-5%    | RAM: 150MB
+backup-manager (Restic): CPU: 5-20%   | RAM: 200MB
+media-indexer:           CPU: 10-25%  | RAM: 400MB   (CV/ML para tags e faces)
+
+Total:                   CPU: ~55-135% (0.5-1.3 cores) | RAM: ~2.4GB
+OS + Docker runtime:     RAM: ~500MB
+TOTAL:                   ~2.9GB / 8GB = 36% ✅
+MARGEM LIVRE:            ~5.1GB (64%)
+```
+
+> **Comparativo anterior (com Ollama):** 8.2GB / 8GB = 103% ⚠️ (precisava de swap).  
+> Remover o modelo local libertou **2.5GB** e eliminou a necessidade de swap completamente.
 
 ---
 

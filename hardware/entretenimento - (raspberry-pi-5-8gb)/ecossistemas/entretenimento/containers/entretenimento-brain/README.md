@@ -1,7 +1,7 @@
 # 🎬 Entretenimento Brain
 
 **Container:** `entretenimento-brain`  
-**LLM:** Ollama Qwen 1.5B Q4_K_M  
+**LLM:** Cloud API via LiteLLM (Claude / Gemini Flash)  
 **Hardware:** Raspberry Pi 5 8GB
 
 ---
@@ -25,7 +25,7 @@ LLM para interpretar comandos de entretenimento ("coloca aquele filme do Tom Han
 
 ```yaml
 Core:
-  - Ollama (Qwen 1.5B Q4_K_M)
+  - LiteLLM (Cloud API client)
   - NATS (comandos de mídia)
   - PostgreSQL (histórico de reprodução)
   - Jellyfin API (busca de conteúdo)
@@ -40,10 +40,9 @@ Optional:
 ## 📊 Especificações
 
 ```yaml
-VRAM: 0.9GB (Qwen 1.5B Q4)
-RAM: 2.5GB (modelo + contexto)
-CPU: 120%
-Latência: 400-600ms
+RAM: 150MB (LiteLLM client + contexto)
+CPU: 5-15%
+Latência: 300-800ms (depende do provedor cloud)
 Temperature: 0.3  # Criatividade moderada
 ```
 

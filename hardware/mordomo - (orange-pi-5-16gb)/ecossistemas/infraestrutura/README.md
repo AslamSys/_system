@@ -2,7 +2,7 @@
 
 > 🗂️ **Navegação:** [🏠 Início](../../../../README.md) > [🔧 Hardware](../../../README.md) > [🎯 Mordomo](../../README.md) > [🌐 Ecossistemas](../README.md) > [🔧 Infraestrutura](README.md)
 
-Serviços de base essenciais para comunicação, descoberta, armazenamento de dados e vetores. Compartilhados por todos os ecossistemas.
+Serviços de base essenciais para comunicação, descoberta, armazenamento de dados, vetores e **inferência LLM centralizada**. Compartilhados por todos os ecossistemas.
 
 ---
 
@@ -15,33 +15,35 @@ O ecossistema de **Infraestrutura** fornece os pilares fundamentais para o funci
 - 💾 **Persistência de dados** (PostgreSQL)
 - 🧠 **Armazenamento vetorial** (Qdrant para RAG)
 - 🔴 **Cache e Sessão** (Redis)
+- 🤖 **Proxy LLM centralizado** (llm-gateway — roteamento Cloud ↔ Local)
 
 ---
 
-## Arquitetura de Containers (5 containers)
+## Arquitetura de Containers (6 containers)
 
 ```
-┌────────────────────────────────────────────────┐
-│          ECOSSISTEMA INFRAESTRUTURA            │
-├────────────────────────────────────────────────┤
-│                                                │
-│  ┌──────────────┐         ┌──────────────┐   │
-│  │     NATS     │◄────────│   Consul     │   │
-│  │  Event Bus   │         │  Discovery   │   │
-│  └──────────────┘         └──────────────┘   │
-│         ▲                                      │
-│         │                                      │
-│  ┌──────┴───────┐         ┌──────────────┐   │
-│  │   Qdrant     │         │  PostgreSQL  │   │
-│  │   Vetores    │         │  Relacionais │   │
-│  └──────────────┘         └──────────────┘   │
-│                                                │
-│  ┌──────────────────────────────────────┐    │
-│  │              Redis                   │    │
-│  │         Cache & Session              │    │
-│  └──────────────────────────────────────┘    │
-│                                                │
-└────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│               ECOSSISTEMA INFRAESTRUTURA                   │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  ┌──────────────┐         ┌──────────────┐               │
+│  │     NATS     │◄────────│   Consul     │               │
+│  │  Event Bus   │         │  Discovery   │               │
+│  └──────────────┘         └──────────────┘               │
+│         ▲                                                  │
+│         │                                                  │
+│  ┌──────┴───────┐         ┌──────────────┐               │
+│  │   Qdrant     │         │  PostgreSQL  │               │
+│  │   Vetores    │         │  Relacionais │               │
+│  └──────────────┘         └──────────────┘               │
+│                                                            │
+│  ┌──────────────────────┐  ┌──────────────────────────┐  │
+│  │        Redis         │  │      llm-gateway          │  │
+│  │   Cache & Session    │  │  LiteLLM Proxy :4000      │  │
+│  │                      │  │  Cloud ↔ Jetson/Ollama    │  │
+│  └──────────────────────┘  └──────────────────────────┘  │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -585,6 +587,45 @@ redis:
 
 ---
 
+### 6. **llm-gateway (LiteLLM Proxy)**
+
+**Função:** Proxy centralizado para inferência LLM — todos os brains do sistema (em qualquer hardware) chamam exclusivamente este endpoint.
+
+**Tecnologia:** LiteLLM Proxy Server (ghcr.io/berriai/litellm)
+
+**Por que centralizar?**
+- ✅ **Um ponto de controle:** Troca modelo de qualquer ecossistema em 1 linha no `config.yaml`
+- ✅ **Sem code change:** Containers cliente não sabem qual provedor está ativo
+- ✅ **Multi-provider:** Claude, GPT-4, Gemini Flash, Ollama (local) — mesmo endpoint
+- ✅ **Fallback automático:** Cloud cai → local; local cai → cloud
+- ✅ **API keys em 1 lugar:** Apenas o Orange Pi possui as credentials
+
+> Ver documentação completa em [containers/llm-gateway/README.md](containers/llm-gateway/README.md)
+
+**Docker Compose:**
+```yaml
+llm-gateway:
+  image: ghcr.io/berriai/litellm:main-stable
+  container_name: llm-gateway
+  restart: unless-stopped
+  ports:
+    - "4000:4000"   # API (OpenAI-compatible)
+    - "4001:4001"   # UI Admin
+  volumes:
+    - ./llm-gateway/config.yaml:/app/config.yaml:ro
+    - llm-gateway-data:/app/data
+  environment:
+    - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    - OPENAI_API_KEY=${OPENAI_API_KEY}
+    - GEMINI_API_KEY=${GEMINI_API_KEY}
+    - LLM_GATEWAY_MASTER_KEY=${LLM_GATEWAY_MASTER_KEY}
+  command: ["--config", "/app/config.yaml", "--port", "4000", "--num_workers", "2"]
+  networks:
+    - infra-net
+```
+
+---
+
 ## 🔗 Integração entre Containers
 
 ### NATS ↔ Todos os containers
@@ -602,6 +643,11 @@ redis:
 ### Discovery ↔ Todos os containers
 - Containers se registram ao iniciar
 - Descobrem outros serviços dinamicamente
+
+### llm-gateway ↔ Todos os brains
+- `mordomo-brain`, `nas-brain`, `entretenimento-brain`, `investimentos-brain`, `pagamentos-brain` e `seguranca-brain` apontam para `http://llm-gateway:4000`
+- O gateway decide se encaminha para Cloud (Anthropic/Google/OpenAI) ou local (Ollama no Jetson)
+- Trocar o provedor: editar `config.yaml` + `docker kill -s HUP llm-gateway` (sem downtime)
 
 ---
 
@@ -665,11 +711,31 @@ services:
     networks:
       - infra-net
 
+  llm-gateway:
+    image: ghcr.io/berriai/litellm:main-stable
+    container_name: llm-gateway
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+      - "4001:4001"
+    volumes:
+      - ./llm-gateway/config.yaml:/app/config.yaml:ro
+      - llm-gateway-data:/app/data
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - LLM_GATEWAY_MASTER_KEY=${LLM_GATEWAY_MASTER_KEY}
+    command: ["--config", "/app/config.yaml", "--port", "4000", "--num_workers", "2"]
+    networks:
+      - infra-net
+
 volumes:
   nats-data:
   consul-data:
   qdrant-data:
   postgres-data:
+  llm-gateway-data:
 
 networks:
   infra-net:
@@ -701,6 +767,7 @@ docker-compose down
 | Consul | 8500, 8600 | UI: http://localhost:8500 |
 | Qdrant | 6333, 6334 | REST: 6333, gRPC: 6334, UI: http://localhost:6333/dashboard |
 | PostgreSQL | 5432 | psql -h localhost -U aslam -d mordomo |
+| llm-gateway | 4000, 4001 | API: http://llm-gateway:4000, Admin UI: http://localhost:4001 |
 
 ---
 

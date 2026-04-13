@@ -8,12 +8,12 @@ Sistema de assistente de voz inteligente com **módulos especializados** executa
 
 ## 🎯 Visão Geral do Sistema
 
-**1 Sistema Central (Mordomo) + 5 Módulos Especializados = 7 Hardwares Independentes**
+**1 Sistema Central (Mordomo) + 3 Módulos Especializados = 4 Hardwares Independentes**
 
-- **Investimento Total:** $1.077 (hardwares + armazenamento + rede)
-- **Consumo Energético:** 47-75W  
-- **Containers Totais:** 60+ (23 Mordomo + 37 módulos)
-- **LLMs Independentes:** 6 (1 central + 5 módulos, IoT sem LLM, Comunicação/RPA integrados via OpenClaw)
+- **Investimento Total:** $814 (hardwares + armazenamento + rede)
+- **Consumo Energético:** 32-53W  
+- **Containers Totais:** 60+ (28 Orange Pi + 32 módulos)
+- **LLMs Independentes:** 4 (1 central + 3 módulos)
 - **Comunicação:** NATS (pub/sub assíncrono)
 
 ---
@@ -70,7 +70,7 @@ _Nota: Comunicação e RPA foram integrados ao Mordomo Central via OpenClaw Agen
 
 ## 🎯 Ecossistemas Implementados
 
-### 🎤️ Mordomo (14 containers)
+### 🏠 Mordomo (15 containers)
 Pipeline completo de processamento de voz + comunicação + RPA:
 - `audio-bridge` - WebRTC ↔ NATS audio streaming
 - `audio-capture-vad` - Captura de áudio com VAD
@@ -81,11 +81,19 @@ Pipeline completo de processamento de voz + comunicação + RPA:
 - `source-separation` - Separação de vozes sobrepostas
 - `core-gateway` - REST + WebSocket API
 - `mordomo-orchestrator` - Estado + Contexto + Dispatcher
-- `mordomo-brain` - LLM (Cloud APIs via LiteLLM, fallback Qwen 2.5 1.5B local + RAG)
+- `mordomo-brain` - LLM (Cloud APIs via LiteLLM — sem modelo local)
 - `tts-engine` - Text-to-Speech (Piper/Azure)
 - `system-watchdog` - DEFCON + Thermal protection
 - `dashboard-ui` - Canvas A2UI
+- `skills-runner` - Python Sandbox para skills
 - `openclaw-agent` - **OpenClaw Agent** (Comunicação multi-canal + RPA browser, LLM próprio Gemini Flash)
+
+### 📱 IoT (4 containers)
+Gerenciamento de dispositivos ESP32 DIY:
+- `iot-orchestrator` - NATS → MQTT translator
+- `mqtt-broker` - Eclipse Mosquitto (broker local)
+- `iot-state-cache` - Redis (estados em tempo real < 5ms)
+- `bluetooth-scanner` - Presence detection via BLE
 
 ### 🏗️ Infraestrutura (5 containers)
 Serviços de suporte:

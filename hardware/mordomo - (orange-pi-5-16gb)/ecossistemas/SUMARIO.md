@@ -15,18 +15,21 @@ Toda a documentação do projeto foi **reestruturada em 3 ecossistemas independe
 │
 └── 📂 ecossistemas/
     │
-    ├── 📄 README.md                      # Visão geral dos 3 ecossistemas
+    ├── 📄 README.md                      # Visão geral dos 4 ecossistemas
     ├── 📄 COMPARATIVO.md                 # O que mudou vs documento original
     │
     ├─ 📂 mordomo/                       # 🏠 ECOSSISTEMA 1: Assistente de Voz + OpenClaw
-    │   ├─ 📄 README.md                  # Documentação completa (14 containers)
+    │   ├─ 📄 README.md                  # Documentação completa (15 containers)
     │   └─ 📄 ORIGINAL.md                # Documento original (referência histórica)
     │
-    ├─ 💲 infraestrutura/                # 🔧 ECOSSISTEMA 2: Serviços de Base
-    │   └─ 💲 README.md                  # NATS, Consul, Qdrant, PostgreSQL, Aslam App (5 containers)
+    ├─ 📂 iot/                           # 📱 ECOSSISTEMA 2: IoT (ESP32 DIY + BLE)
+    │   └─ 📄 README.md                  # MQTT, Redis, Bluetooth Scanner (4 containers)
     │
-    └── 📂 monitoramento/                 # 📊 ECOSSISTEMA 3: Observabilidade
-        └── 📄 README.md                  # Prometheus, Loki, Grafana (3 containers)
+    ├─ 💲 infraestrutura/                # 🔧 ECOSSISTEMA 3: Serviços de Base
+    └─ 💲 README.md                  # NATS, Consul, Qdrant, PostgreSQL, Aslam App, **llm-gateway** (6 containers)
+    │
+    └── 📂 monitoramento/                 # 📊 ECOSSISTEMA 4: Observabilidade
+        └── 📄 README.md                  # Prometheus, Loki, Grafana (4 containers)
 ```
 
 ---
@@ -135,7 +138,7 @@ Cada container tem UMA responsabilidade bem definida:
 - Dashboards visuais em tempo real
 
 ### 4. **Local-First, Cloud-Second**
-- LLM local (Ollama) como padrão
+- LLM via Cloud API (LiteLLM) — sem modelo local no hardware
 - APIs cloud (GPT, Claude) como fallback
 - Privacidade garantida
 

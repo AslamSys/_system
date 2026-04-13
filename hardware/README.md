@@ -2,64 +2,52 @@
 
 > 📍 **Navegação:** [🏠 Início](../README.md) > [🔧 Hardware](README.md)
 
-Este diretório organiza todos os hardwares do sistema Mordomo, cada um dedicado a um módulo específico com LLM própria.
+Este diretório organiza todos os hardwares do sistema Mordomo. Cada hardware é dedicado a um módulo específico. **LLM roda exclusivamente via Cloud API (LiteLLM)** em todos os módulos — sem modelos locais nos hardwares de aplicação.
 
 ## 📊 Resumo da Infraestrutura
 
 | Hardware | Módulo | RAM | LLM | NPU/GPU | Preço | Consumo |
-|----------|--------|-----|-----|---------|-------|---------|-----|
-| Orange Pi 5 16GB | ✅ Mordomo (Central + OpenClaw) | 16GB | Cloud (fallback 1.5B) | 6 TOPS | $130 | 10-15W |
-| Jetson Orin Nano | Segurança (Vision) | 8GB | Qwen 3B Vision | 1024 CUDA | $249 | 10-15W |
-| RPi 3B+ | ✅ IoT (Sem LLM) | 1GB | - | - | $83 | 2-3W |
-| RPi 5 4GB | Pagamentos | 4GB | Qwen 1.5B | - | $60 | 5-7W |
-| RPi 5 16GB | Investimentos | 16GB | Qwen 3B | - | $120 | 8-12W |
-| RPi 5 8GB | Entretenimento | 8GB | Qwen 1.5B | - | $80 | 6-10W |
-| RPi 5 8GB | NAS (Storage) | 8GB | Qwen 1.5B | - | $355 | 6-10W |
+|----------|--------|-----|-----|---------|-------|---------|
+| Orange Pi 5 Ultra 16GB | ✅ Mordomo Central + OpenClaw + **IoT** | 16GB | Cloud API (LiteLLM) | 6 TOPS | $130 | 10-18W |
+| Jetson Orin Nano | Segurança (Vision) | 8GB | Qwen 3B Vision (local, necessário para RT) | 1024 CUDA | $249 | 10-15W |
+| RPi 5 8GB | Entretenimento | 8GB | Cloud API (LiteLLM) | - | $80 | 6-10W |
+| RPi 5 8GB | NAS (Storage) | 8GB | Cloud API (LiteLLM) | - | $355 | 6-10W |
 
-**TOTAL**: **7 hardwares** | **$1.077** | **47-75W**
+**TOTAL**: **4 hardwares** | **$814** | **32-53W**
+
+_Nota: IoT migrado para o Orange Pi 5 Ultra (Wi-Fi 6 como Access Point + eth0 para rede doméstica). Pagamentos e Investimentos também consolidados no Orange Pi._
 
 ## 🎯 Justificativa Técnica
 
-### **Por que não usar Orange Pi em todos os módulos?**
+### **Por que Cloud API em vez de LLM local?**
 
-1. **Preço**: Orange Pi 5 16GB ($130) vs RPi 5 8GB ($80) = **$50 de diferença**
-2. **NPU não utilizada**: Módulos simples (Pagamentos, NAS) não precisam de NPU 6 TOPS
-3. **Ecossistema**: Raspberry Pi tem suporte melhor, mais documentação, mais confiável
-4. **Disponibilidade**: RPi tem estoque mais estável e fornecimento global
+1. **Hardware leve**: RPi 5 8GB não é feito para inferir LLMs — 2.5GB ocupados por Qwen 1.5B é desperdício de RAM que outros containers precisam
+2. **Qualidade**: Claude / GPT-4 / Gemini Flash são ordens de magnitude melhores que Qwen 1.5B
+3. **Latência aceitável**: Para comandos de entretenimento, NAS e IoT, 300-800ms via API é imperceptivel
+4. **Escalabilidade**: Quando quiser local, **um único Jetson Orin Nano Super serve todos os módulos** via Ollama API
 
-### **Quando usar Orange Pi?**
+### **Quando usar LLM local? (futuro)**
 
-- **Mordomo + OpenClaw**: Sistema central precisa de NPU para inferência rápida + OpenClaw Agent (Comunicação + RPA integrados)
+Se privacidade total ou offline for necessário: **Jetson Orin Nano Super** ($249, 67 TOPS, 8GB unificado) roda como servidor Ollama centralizado — todos os brains do sistema apontam para `http://jetson-llm:11434`. Modelos possíveis: Llama 3.1 8B Q4, Qwen 2.5 7B Q4 (~4GB cada).
 
-### **Quando usar Jetson?**
+### **Quando usar Jetson para Segurança?**
 
-- **Segurança**: 1024 CUDA cores são essenciais para visão AI em tempo real (múltiplas câmeras)
+- **Segurança**: 1024 CUDA cores são essenciais para YOLO + reconhecimento facial em tempo real em múltiplas câmeras. Aqui LLM Vision local é **necessária** (baixa latência, sem enviar frames para cloud)
 
 ## 📁 Estrutura de Diretórios
 
 ```
 hardware/
-├── ✅ mordomo - (orange-pi-5-16gb)/             # Mordomo (Central + OpenClaw) - 16GB RAM
+├── ✅ mordomo - (orange-pi-5-ultra-16gb)/       # Central: Mordomo + OpenClaw + IoT - 16GB RAM
 │   └── ecossistemas/
-│       ├── mordomo/              # 14 containers (13 core + 1 OpenClaw)
-│       ├── infraestrutura/       # 5 containers
+│       ├── mordomo/              # 15 containers (14 core + 1 OpenClaw)
+│       ├── iot/                  # 4 containers (Wi-Fi AP + MQTT + BLE)
+│       ├── infraestrutura/       # 6 containers (+ llm-gateway LiteLLM Proxy)
 │       └── monitoramento/        # 4 containers
 │
 ├── seguranca - (jetson-orin-nano)/   # Módulo de Segurança
 │   └── ecossistemas/
 │       └── seguranca/            # 7 containers + LLM Vision
-│
-├── ✅ iot - (raspberry-pi-3b)/          # Módulo IoT (sem LLM, ESP32 DIY)
-│   └── ecossistemas/
-│       └── iot/                  # 4 containers (Access Point + MQTT)
-│
-├── pagamentos - (raspberry-pi-5-4gb)/    # Módulo de Pagamentos
-│   └── ecossistemas/
-│       └── pagamentos/           # 6 containers + LLM
-│
-├── investimentos - (raspberry-pi-5-16gb)/ # Módulo de Investimentos
-│   └── ecossistemas/
-│       └── investimentos/        # 7 containers + LLM
 │
 ├── entretenimento - (raspberry-pi-5-8gb)/ # Módulo de Entretenimento
 │   └── ecossistemas/
@@ -120,13 +108,12 @@ hardware/
 
 ## 🚀 Roadmap de Implementação
 
-1. **Fase 1**: ✅ Mordomo + OpenClaw (Orange Pi 5 16GB) - Sistema central (23 containers)
-2. **Fase 2**: ✅ IoT (RPi 3B+) - ESP32 DIY + Access Point auditado (4 containers)
-3. **Fase 3**: NAS (RPi 5 8GB) - Armazenamento e backup de fotos/arquivos
-4. **Fase 4**: Segurança (Jetson Orin) - Câmeras e monitoramento
-5. **Fase 5**: Entretenimento (RPi 5 8GB) - Media center
-6. **Fase 6**: Pagamentos (RPi 5 4GB) - Integração financeira
-7. **Fase 7**: Investimentos (RPi 5 16GB) - Trading bots
+1. **Fase 1**: ✅ Mordomo + OpenClaw + IoT (Orange Pi 5 Ultra 16GB) - Sistema central (28 containers)
+2. **Fase 2**: NAS (RPi 5 8GB) - Armazenamento e backup de fotos/arquivos
+3. **Fase 3**: Segurança (Jetson Orin Nano) - Câmeras e monitoramento
+4. **Fase 4**: Entretenimento (RPi 5 8GB) - Media center
+
+_Nota: Pagamentos e Investimentos consolidados no Orange Pi 5 Ultra. RPi 3B+ eliminado (IoT migrado para o hardware central)._
 
 ## 📈 Escalabilidade
 
