@@ -39,9 +39,9 @@ Módulo responsável por:
 
 ## 📦 Containers e Repositórios
 
-Este hardware executa **8 containers** especializados em armazenamento:
+Este hardware executa **9 containers** especializados em armazenamento e mídia:
 
-### 💾 Ecossistema NAS (8 containers)
+### 💾 Ecossistema NAS + Entretenimento (9 containers)
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
@@ -53,6 +53,7 @@ Este hardware executa **8 containers** especializados em armazenamento:
 | **smb-server** | Compartilhamentos Samba | 📋 | [AslamSys/nas-smb-server](https://github.com/AslamSys/nas-smb-server) |
 | **backup-manager** | Backup incremental Restic | 📋 | [AslamSys/nas-backup-manager](https://github.com/AslamSys/nas-backup-manager) |
 | **media-indexer** | AI tagging + reconhecimento facial | 📋 | [AslamSys/nas-media-indexer](https://github.com/AslamSys/nas-media-indexer) |
+| **media-server** | Jellyfin — streaming de mídia | 📋 | [AslamSys/entretenimento-media-server](https://github.com/AslamSys/entretenimento-media-server) |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando em produção

@@ -22,11 +22,14 @@ Módulo responsável por:
 - Machine Learning para predição
 - Portfolio management
 
-## 🧠 LLM - Qwen 3B Q4_K_M
+## 🧠 LLM — Cloud API via LiteLLM
 
-- **Modelo**: 3B parâmetros, 1.8GB VRAM
+- **Estratégia**: Cloud API exclusivamente (Claude, GPT-4o-mini, Gemini Flash)
+- **Framework**: LiteLLM
 - **Função**: Análise de notícias financeiras, sentiment analysis, recomendações
-- **Recursos**: 3GB RAM necessária / 16GB disponível = **19% uso** ✅ (sobra muito)
+- **Recursos**: ~150MB RAM — nenhum modelo rodando localmente
+
+> LLM local futura, se necessário: Jetson Orin Nano Super dedicado ($249), compartilhado por todos os módulos via API.
 
 ## 📦 Containers e Repositórios
 
@@ -36,7 +39,7 @@ Este hardware executa **7 containers** especializados em investimentos:
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
-| **investimentos-brain** | LLM financeiro (Qwen 3B) | 📋 | [AslamSys/investimentos-brain](https://github.com/AslamSys/investimentos-brain) |
+| **investimentos-brain** | LLM financeiro (Cloud API via LiteLLM) | 📋 | [AslamSys/investimentos-brain](https://github.com/AslamSys/investimentos-brain) |
 | **stock-trading-bot** | Trading automatizado | 📋 | [AslamSys/investimentos-trading-bot](https://github.com/AslamSys/investimentos-trading-bot) |
 | **technical-analysis** | Análise técnica (TA-Lib) | 📋 | [AslamSys/investimentos-technical-analysis](https://github.com/AslamSys/investimentos-technical-analysis) |
 | **news-sentiment** | Sentiment analysis (FinBERT) | 📋 | [AslamSys/investimentos-news-sentiment](https://github.com/AslamSys/investimentos-news-sentiment) |
@@ -51,11 +54,10 @@ Este hardware executa **7 containers** especializados em investimentos:
 
 **📊 Fase atual:** Todos os containers estão em **fase de estudo/planejamento** (📋)
 
-**📁 Recursos do Hardware:**
-- **RAM Total**: 16GB / 16GB = **100% uso** ⚠️ (limite, mas aceitável)
-- **CPU Total**: 700% / 400% = **175% uso** ❌ (execução por turnos)
-- **CPU Ajustada**: 450% / 400% = **113% uso** ✅ (4-5 containers ativos)
-- **LLM**: Qwen 3B Q4_K_M (3GB RAM, 150% CPU)
+**📁 Recursos do Hardware (recalculado):**
+- **RAM Total**: ~3.0GB / 16GB = **19% uso** ✅✅ (13GB livres — benefício direto de remover Ollama local)
+- **CPU Total**: 250% / 400% = **63% uso** ✅
+- **LLM**: Cloud API via LiteLLM (zero RAM local para modelo)
 
 ---
 

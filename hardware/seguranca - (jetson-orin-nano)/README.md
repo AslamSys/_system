@@ -71,7 +71,7 @@ Este hardware executa **7 containers** especializados em segurança:
 | **face-recognition** | Reconhecimento facial (FaceNet) | 📋 | [AslamSys/seguranca-face-recognition](https://github.com/AslamSys/seguranca-face-recognition) |
 | **event-analyzer** | Análise de comportamento suspeito | 📋 | [AslamSys/seguranca-event-analyzer](https://github.com/AslamSys/seguranca-event-analyzer) |
 | **alert-manager** | Alertas inteligentes via NATS | 📋 | [AslamSys/seguranca-alert-manager](https://github.com/AslamSys/seguranca-alert-manager) |
-| **storage-manager** | Gravação contínua H.264 NVENC | 📋 | [AslamSys/seguranca-video-recorder](https://github.com/AslamSys/seguranca-video-recorder) |
+| **video-recorder** | Gravação contínua H.264 NVENC | 📋 | [AslamSys/seguranca-video-recorder](https://github.com/AslamSys/seguranca-video-recorder) |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando em produção

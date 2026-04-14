@@ -8,14 +8,14 @@ Este diretório organiza todos os hardwares do sistema Mordomo. Cada hardware é
 
 | Hardware | Módulo | RAM | LLM | NPU/GPU | Preço | Consumo |
 |----------|--------|-----|-----|---------|-------|---------|
-| Orange Pi 5 Ultra 16GB | ✅ Mordomo Central + OpenClaw + **IoT** | 16GB | Cloud API (LiteLLM) | 6 TOPS | $130 | 10-18W |
-| Jetson Orin Nano | Segurança (Vision) | 8GB | Qwen 3B Vision (local, necessário para RT) | 1024 CUDA | $249 | 10-15W |
-| RPi 5 8GB | Entretenimento | 8GB | Cloud API (LiteLLM) | - | $80 | 6-10W |
-| RPi 5 8GB | NAS (Storage) | 8GB | Cloud API (LiteLLM) | - | $355 | 6-10W |
+| Orange Pi 5 Ultra 16GB | ✅ Mordomo Central + OpenClaw + **IoT** (35 containers) | 16GB | Cloud API (LiteLLM) | 6 TOPS | $130 | 10-18W |
+| Jetson Orin Nano 8GB | Segurança (Vision) (7 containers) | 8GB | Qwen 3B Vision (local, necessário para RT) | 1024 CUDA | $312 | 10-15W |
+| RPi 5 16GB | Investimentos (7 containers) | 16GB | Cloud API (LiteLLM) | - | $140 | 6-10W |
+| NAS (RPi 5 8GB) | NAS + Entretenimento (9 containers) | 8GB | Cloud API (LiteLLM) | - | $355 | 6-10W |
 
-**TOTAL**: **4 hardwares** | **$814** | **32-53W**
+**TOTAL**: **4 hardwares** | **$937** | **32-53W**
 
-_Nota: IoT migrado para o Orange Pi 5 Ultra (Wi-Fi 6 como Access Point + eth0 para rede doméstica). Pagamentos e Investimentos também consolidados no Orange Pi._
+_Nota: IoT migrado para o Orange Pi 5 Ultra (Wi-Fi 6 como Access Point + eth0 para rede doméstica). Pagamentos eliminado — absorvido pelo Mordomo (mordomo-financas-pix + mordomo-financas-contas). Entretenimento eliminado — Jellyfin migrado para o NAS._
 
 ## 🎯 Justificativa Técnica
 
@@ -38,38 +38,38 @@ Se privacidade total ou offline for necessário: **Jetson Orin Nano Super** ($24
 
 ```
 hardware/
-├── ✅ mordomo - (orange-pi-5-ultra-16gb)/       # Central: Mordomo + OpenClaw + IoT - 16GB RAM
+├── mordomo - (orange-pi-5-16gb)/         # Central: Mordomo + IoT — 35 containers
 │   └── ecossistemas/
-│       ├── mordomo/              # 15 containers (14 core + 1 OpenClaw)
-│       ├── iot/                  # 4 containers (Wi-Fi AP + MQTT + BLE)
-│       ├── infraestrutura/       # 6 containers (+ llm-gateway LiteLLM Proxy)
-│       └── monitoramento/        # 4 containers
+│       ├── mordomo/              # 21 containers (STT + Output + OpenClaw + Core + Identity + Financas)
+│       ├── iot/                  # 4 containers (Wi-Fi AP + MQTT + Redis + TV)
+│       ├── infraestrutura/       # 6 containers (NATS, Consul, Qdrant, Postgres, App, LLM Gateway)
+│       └── monitoramento/        # 4 containers (Prometheus, Loki, Grafana, Promtail)
 │
-├── seguranca - (jetson-orin-nano)/   # Módulo de Segurança
+├── seguranca - (jetson-orin-nano)/       # Segurança — 7 containers + LLM Vision
 │   └── ecossistemas/
-│       └── seguranca/            # 7 containers + LLM Vision
+│       └── seguranca/
 │
-├── entretenimento - (raspberry-pi-5-8gb)/ # Módulo de Entretenimento
+├── investimentos - (raspberry-pi-5-16gb)/ # Investimentos — 7 containers
 │   └── ecossistemas/
-│       └── entretenimento/       # 6 containers + LLM
+│       └── investimentos/
 │
-└── nas - (raspberry-pi-5-8gb)/       # Módulo NAS (Storage)
+└── nas - (raspberry-pi-5-8gb)/           # NAS + Jellyfin — 9 containers
     └── ecossistemas/
-        └── nas/                  # 8 containers + LLM
+        └── nas/
 ```
 
 ## 🔌 Requisitos de Energia
 
 ### Fonte de Alimentação Total
-- **Consumo Médio**: ~70W
-- **Consumo Pico**: ~85W
-- **Recomendação**: Fonte ATX 400W ou UPS 1000VA
+- **Consumo Médio**: ~32W
+- **Consumo Pico**: ~53W
+- **Recomendação**: UPS 650VA ou fonte 12V estabilizada
 
 ### Por Hardware
-- **Orange Pi 5**: 5V/4A (20W) - USB-C PD
-- **RPi 5**: 5V/5A (27W) - USB-C PD
-- **Jetson Orin**: 12V/2A (24W) - DC Barrel
-- **RPi 3B+**: 5V/2.5A (12.5W) - Micro USB
+- **Orange Pi 5 Ultra**: 5V/4A (10-18W) - USB-C PD
+- **Jetson Orin Nano**: 12V/2A (10-15W) - DC Barrel
+- **RPi 5 16GB (Investimentos)**: 5V/5A (6-10W) - USB-C PD
+- **RPi 5 8GB (NAS)**: 5V/5A (6-10W) - USB-C PD
 
 ## 🌐 Rede e Comunicação
 
@@ -85,35 +85,32 @@ hardware/
 - **PostgreSQL**: Roda no Mordomo (Orange Pi 5 16GB)
 
 ### Por Hardware
-- **Mordomo**: MicroSD 128GB (Samsung EVO Plus ~$20) + **SSD NVMe 256GB** (~$35)
-- **Segurança**: MicroSD 128GB (~$20) - armazena vídeos temporariamente
-- **IoT**: MicroSD 32GB (~$8)
-- **Pagamentos**: MicroSD 64GB (~$12) - logs financeiros
-- **Investimentos**: MicroSD 128GB (~$20) - dados históricos
-- **Entretenimento**: MicroSD 128GB (~$20) + **HD Externo 2TB** (~$65)
-- **NAS**: MicroSD 64GB (~$12) + **2x HDD 4TB RAID 1** (~$180) + **SSD NVMe 1TB** (~$70)
+- **Mordomo (Orange Pi)**: MicroSD 128GB (~$20) + **SSD NVMe 256GB** (~$35)
+- **Segurança (Jetson)**: MicroSD 128GB (~$20) - vídeos temporários
+- **Investimentos (RPi 5 16GB)**: MicroSD 128GB (~$20) - dados históricos
+- **NAS (RPi 5 8GB)**: MicroSD 64GB (~$12) + **2x HDD 4TB RAID 1** (~$180) + **SSD NVMe 1TB** (~$70)
 
-**Total Armazenamento**: ~$462
+**Total Armazenamento**: ~$357
 
 ## 📦 Custo Total do Projeto
 
 | Categoria | Custo |
 |-----------|-------|
-| Hardwares | $1.077 |
-| Armazenamento | $462 |
+| Hardwares | $937 |
+| Armazenamento | $357 |
 | Rede (switch + cabos) | $40 |
-| Fontes de Alimentação | $80 |
-| Cases e Refrigeração | $60 |
-| **TOTAL** | **$1.719** |
+| Fontes de Alimentação | $60 |
+| Cases e Refrigeração | $50 |
+| **TOTAL** | **$1.444** |
 
 ## 🚀 Roadmap de Implementação
 
-1. **Fase 1**: ✅ Mordomo + OpenClaw + IoT (Orange Pi 5 Ultra 16GB) - Sistema central (28 containers)
-2. **Fase 2**: NAS (RPi 5 8GB) - Armazenamento e backup de fotos/arquivos
+1. **Fase 1**: ✅ Mordomo + OpenClaw + IoT (Orange Pi 5 Ultra 16GB) - Sistema central (35 containers)
+2. **Fase 2**: NAS + Jellyfin (RPi 5 8GB) - Armazenamento e media
 3. **Fase 3**: Segurança (Jetson Orin Nano) - Câmeras e monitoramento
-4. **Fase 4**: Entretenimento (RPi 5 8GB) - Media center
+4. **Fase 4**: Investimentos (RPi 5 16GB) - Trading e análise financeira
 
-_Nota: Pagamentos e Investimentos consolidados no Orange Pi 5 Ultra. RPi 3B+ eliminado (IoT migrado para o hardware central)._
+_Nota: Pagamentos eliminado — absorvido pelo Mordomo. Entretenimento eliminado — Jellyfin migrado para o NAS. IoT integrado ao Orange Pi 5 Ultra. RPi 3B+ eliminado._
 
 ## 📈 Escalabilidade
 
