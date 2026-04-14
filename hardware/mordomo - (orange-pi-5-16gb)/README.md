@@ -95,7 +95,7 @@ Este hardware executa **34 containers** distribuídos em 4 ecossistemas:
 | **openclaw-agent** | Comunicação + RPA + Skills | 📋 | [AslamSys/mordomo-openclaw-agent](https://github.com/AslamSys/mordomo-openclaw-agent) |
 | **mordomo-orchestrator** | Estado + Contexto + Dispatcher | 📋 | [AslamSys/mordomo-orchestrator](https://github.com/AslamSys/mordomo-orchestrator) |
 | **mordomo-brain** | LLM + RAG + Reasoning | 📋 | [AslamSys/mordomo-brain](https://github.com/AslamSys/mordomo-brain) |
-| **system-watchdog** | DEFCON + Thermal protection | 📋 | [AslamSys/mordomo-system-watchdog](https://github.com/AslamSys/mordomo-system-watchdog) |
+| **system-watchdog** | DEFCON + Thermal protection | ✅ | [AslamSys/mordomo-system-watchdog](https://github.com/AslamSys/mordomo-system-watchdog) |
 | **core-gateway** | REST + WebSocket API | 📋 | [AslamSys/mordomo-core-gateway](https://github.com/AslamSys/mordomo-core-gateway) |
 | **skills-runner** | Executor Python Sandbox | 📋 | [AslamSys/mordomo-skills-runner](https://github.com/AslamSys/mordomo-skills-runner) |
 | **action-dispatcher** | Despacho de ações | 📋 | [AslamSys/mordomo-action-dispatcher](https://github.com/AslamSys/mordomo-action-dispatcher) |
@@ -111,8 +111,8 @@ Este hardware executa **34 containers** distribuídos em 4 ecossistemas:
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
 | **iot-orchestrator** | Tradução NATS → MQTT para ESP32 | 📋 | [AslamSys/mordomo-iot-orchestrator](https://github.com/AslamSys/mordomo-iot-orchestrator) |
-| **iot-mqtt-broker** | Broker MQTT local (Mosquitto) | 📋 | [AslamSys/mordomo-iot-mqtt-broker](https://github.com/AslamSys/mordomo-iot-mqtt-broker) |
-| **iot-state-cache** | Cache Redis para estados IoT | 📋 | [AslamSys/mordomo-iot-state-cache](https://github.com/AslamSys/mordomo-iot-state-cache) |
+| **iot-mqtt-broker** | Broker MQTT local (Mosquitto) | ✅ | [AslamSys/mordomo-iot-mqtt-broker](https://github.com/AslamSys/mordomo-iot-mqtt-broker) |
+| **iot-state-cache** | Cache Redis para estados IoT | ✅ | [AslamSys/mordomo-iot-state-cache](https://github.com/AslamSys/mordomo-iot-state-cache) |
 | **iot-tv-connector** | Controle de TV via HDMI/IP | 📋 | [AslamSys/mordomo-iot-tv-connector](https://github.com/AslamSys/mordomo-iot-tv-connector) |
 
 _Nota: O Wi-Fi 6 do Orange Pi 5 Ultra opera como **Access Point dedicado** (hostapd + interface virtual) para os dispositivos ESP32 na rede `10.0.0.x`. A conexão com a rede doméstica/internet é feita exclusivamente via **eth0** (Gigabit Ethernet)._
@@ -121,27 +121,27 @@ _Nota: O Wi-Fi 6 do Orange Pi 5 Ultra opera como **Access Point dedicado** (host
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
-| **nats** | Message broker | 📋 | *Repositório aguardando criação* |
-| **consul** | Service discovery | 📋 | *Repositório aguardando criação* |
-| **qdrant** | Vector database (RAG) | 📋 | *Repositório aguardando criação* |
-| **postgres** | Banco relacional | 📋 | *Repositório aguardando criação* |
-| **llm-gateway** | LiteLLM Proxy — roteamento LLM cloud/local | 📋 | *Repositório aguardando criação* |
+| **nats** | Message broker | ✅ | *Repositório aguardando criação* |
+| **consul** | Service discovery | ✅ | *Repositório aguardando criação* |
+| **qdrant** | Vector database (RAG) | ✅ | *Repositório aguardando criação* |
+| **postgres** | Banco relacional | ✅ | *Repositório aguardando criação* |
+| **llm-gateway** | LiteLLM Proxy — roteamento LLM cloud/local | ✅ | *Repositório aguardando criação* |
 
 ### 📊 Ecossistema Monitoramento (4 containers)
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
-| **prometheus** | Coleta de métricas | 📋 | *Repositório aguardando criação* |
-| **loki** | Agregação de logs | 📋 | *Repositório aguardando criação* |
-| **grafana** | Dashboards visuais | 📋 | *Repositório aguardando criação* |
-| **promtail** | Coleta de logs | 📋 | *Repositório aguardando criação* |
+| **prometheus** | Coleta de métricas | ✅ | *Repositório aguardando criação* |
+| **loki** | Agregação de logs | ✅ | *Repositório aguardando criação* |
+| **grafana** | Dashboards visuais | ✅ | *Repositório aguardando criação* |
+| **promtail** | Coleta de logs | ✅ | *Repositório aguardando criação* |
 
 **💡 Status:**
 - ✅ **Implementado** - Container funcionando em produção
 - ⏳ **Em desenvolvimento** - Código em progresso ativo
 - 📋 **Especificado** - Documentado, repositório criado, aguardando implementação
 
-**📊 Fase atual:** Todos os containers estão em **fase de estudo/planejamento** (📋)
+**📊 Fase atual:** Infra + Monitoramento + IoT pull-and-run ✅ prontos | Mordomo custom services 📋 aguardando implementação
 ---
 
 ## 🎙️ Hardware Físico Conectado
