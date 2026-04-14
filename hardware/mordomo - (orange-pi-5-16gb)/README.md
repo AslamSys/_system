@@ -56,12 +56,11 @@ Este hardware hospeda **todos os 4 ecossistemas** do núcleo do sistema em um ú
 │  ├─ iot-state-cache (Redis < 5ms)               │
 │  └─ iot-tv-connector (TV/HDMI control)          │
 │                                                 │
-│  🏗️ Ecossistema INFRAESTRUTURA (6 containers)   │
+│  🏗️ Ecossistema INFRAESTRUTURA (5 containers)   │
 │  ├─ nats (message broker)                       │
 │  ├─ consul (service discovery)                  │
 │  ├─ qdrant (vectors)                            │
 │  ├─ postgres (database)                         │
-│  ├─ aslam-app (tablet interface)                │
 │  └─ llm-gateway (LiteLLM Proxy :4000)           │
 │                                                 │
 │  📊 Ecossistema MONITORAMENTO (4 containers)    │
@@ -70,7 +69,7 @@ Este hardware hospeda **todos os 4 ecossistemas** do núcleo do sistema em um ú
 │  ├─ grafana                                     │
 │  └─ promtail (log collector)                    │
 │                                                 │
-│  Total: 35 containers                           │
+│  Total: 34 containers                           │
 │  📊 Status: Todos em planejamento (📋)           │
 └─────────────────────────────────────────────────┘
 ```
@@ -79,7 +78,7 @@ Este hardware hospeda **todos os 4 ecossistemas** do núcleo do sistema em um ú
 
 ## 📦 Containers e Repositórios
 
-Este hardware executa **35 containers** distribuídos em 4 ecossistemas:
+Este hardware executa **34 containers** distribuídos em 4 ecossistemas:
 
 ### 🎤 Ecossistema Mordomo (21 containers)
 
@@ -118,7 +117,7 @@ Este hardware executa **35 containers** distribuídos em 4 ecossistemas:
 
 _Nota: O Wi-Fi 6 do Orange Pi 5 Ultra opera como **Access Point dedicado** (hostapd + interface virtual) para os dispositivos ESP32 na rede `10.0.0.x`. A conexão com a rede doméstica/internet é feita exclusivamente via **eth0** (Gigabit Ethernet)._
 
-### 🏗️ Ecossistema Infraestrutura (6 containers)
+### 🏗️ Ecossistema Infraestrutura (5 containers)
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
@@ -126,7 +125,6 @@ _Nota: O Wi-Fi 6 do Orange Pi 5 Ultra opera como **Access Point dedicado** (host
 | **consul** | Service discovery | 📋 | *Repositório aguardando criação* |
 | **qdrant** | Vector database (RAG) | 📋 | *Repositório aguardando criação* |
 | **postgres** | Banco relacional | 📋 | *Repositório aguardando criação* |
-| **aslam-app** | Tablet interface (React) | 📋 | *Repositório aguardando criação* |
 | **llm-gateway** | LiteLLM Proxy — roteamento LLM cloud/local | 📋 | *Repositório aguardando criação* |
 
 ### 📊 Ecossistema Monitoramento (4 containers)
@@ -165,11 +163,12 @@ Feedback Visual:
 
 Interface Visual (Opcional):
   Tablet na parede:
-    - Acesso: http://orange-pi-ip:3000
-    - Função: Display secundário
+    - Acesso: http://orange-pi-ip:3000  (dashboard-ui)
+    - Função: Display secundário via browser
     - Uso: Quando Mordomo precisa MOSTRAR algo
     - Exemplos: Gráficos, vídeos de câmera, mapas
     - NÃO é entrada de voz primária
+    - Nota: sem app dedicado — usa o dashboard-ui direto no browser
 
 Rede:
   Ethernet: Gigabit (recomendado)
@@ -258,10 +257,9 @@ nats:                   CPU: 5-10%  | RAM: 50MB
 consul:                 CPU: 5-10%  | RAM: 100MB
 qdrant:                 CPU: 10-20% | RAM: 500MB
 postgres:               CPU: 5-10%  | RAM: 256MB
-aslam-app:              CPU: 3-5%   | RAM: 50MB
 llm-gateway:            CPU: <2%    | RAM: 100-200MB (LiteLLM Proxy, I/O bound)
 
-Total Infraestrutura:   CPU: ~28-57% | RAM: ~1.1GB
+Total Infraestrutura:   CPU: ~25-52% | RAM: ~1.0GB
 ```
 
 #### 📊 Monitoramento
@@ -288,7 +286,7 @@ _Nota: O IoT **não tem IA**. Zero inferência, zero modelo. É puro roteamento 
 
 ---
 
-### 📈 Total Consolidado (35 containers)
+### 📈 Total Consolidado (34 containers)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -298,21 +296,21 @@ _Nota: O IoT **não tem IA**. Zero inferência, zero modelo. É puro roteamento 
 ├──────────────────────┼─────────────┼─────────────┼─────────────┤
 │ 🏠 Mordomo           │ 21          │ ~3.9 GB     │ ~4.7 GB     │
 │ 📱 IoT               │ 4           │ ~460 MB     │ ~460 MB     │
-│ 🔧 Infraestrutura    │ 6           │ ~1.1 GB     │ ~1.1 GB     │
+│ 🔧 Infraestrutura    │ 5           │ ~1.0 GB     │ ~1.0 GB     │
 │ 📊 Monitoramento     │ 4           │ ~880 MB     │ ~1.0 GB     │
 ├──────────────────────┼─────────────┼─────────────┼─────────────┤
-│ Subtotal containers  │ 35          │ ~6.4 GB     │ ~7.3 GB     │
+│ Subtotal containers  │ 34          │ ~6.3 GB     │ ~7.2 GB     │
 │ OS + Docker runtime  │ —           │ ~1.5 GB     │ ~1.5 GB     │
-├──────────────────────┼─────────────┼─────────────┼─────────────┤
-│ TOTAL                │ —           │ ~7.9 GB     │ ~8.8 GB     │
-│ DISPONÍVEL (16GB)    │ —           │ ~8.1 GB     │ ~7.2 GB     │
-│ MARGEM LIVRE         │ —           │ 51%         │ 45%         │
+├──────────────────────├─────────────├─────────────├─────────────┤
+│ TOTAL                │ —           │ ~7.8 GB     │ ~8.7 GB     │
+│ DISPONÍVEL (16GB)    │ —           │ ~8.2 GB     │ ~7.3 GB     │
+│ MARGEM LIVRE         │ —           │ 51%         │ 46%         │
 └──────────────────────┴─────────────┴─────────────┴─────────────┘
 ```
 
 ```yaml
 CPU Total (pico):  200-390% (2.0-3.9 cores de 8 disponíveis)
-RAM Total (pico):  ~8.8GB de 16GB
+RAM Total (pico):  ~8.7GB de 16GB
 Storage:           20-35GB (containers + data)
 Margem CPU:        ✅ Sobra 4.1-5.8 cores (51-73% livre)
 Margem RAM:        ✅ Sobra ~7.2GB no pico (45% livre)
@@ -321,7 +319,7 @@ Margem RAM:        ✅ Sobra ~7.2GB no pico (45% livre)
 > **Pico** = browser do openclaw-agent ativo simultaneamente com todos os containers.  
 > O Whisper ASR e o browser são os dois maiores consumidores individuais (~1.5GB e ~2GB respectivamente).
 
-**Conclusão:** ✅ **VIÁVEL** — 35 containers rodam com ~45% de RAM livre mesmo no pico. O `llm-gateway` centraliza todo o controle de inferência; os 7 novos containers (visual-feedback, action-dispatcher, people, vault, financas) adicionam apenas ~500MB.
+**Conclusão:** ✅ **VIÁVEL** — 34 containers rodam com ~46% de RAM livre mesmo no pico. O `llm-gateway` centraliza todo o controle de inferência; os 7 novos containers (visual-feedback, action-dispatcher, people, vault, financas) adicionam apenas ~500MB.
 
 ---
 
@@ -531,15 +529,14 @@ orange-pi-5-16gb/
 │   │       ├── iot-state-cache/
 │   │       └── iot-tv-connector/
 │   │
-│   ├── infraestrutura/             # 6 containers
+│   ├── infraestrutura/             # 5 containers
 │   │   ├── README.md
-│   │   ├── docker-compose.yml      # nats, consul, qdrant, postgres, aslam-app, llm-gateway
+│   │   ├── docker-compose.yml      # nats, consul, qdrant, postgres, llm-gateway
 │   │   └── containers/
 │   │       ├── nats/
 │   │       ├── consul/
 │   │       ├── qdrant/
 │   │       ├── postgres/
-│   │       ├── aslam-app/
 │   │       └── llm-gateway/
 │   │
 │   └── monitoramento/              # 4 containers
@@ -566,7 +563,7 @@ orange-pi-5-16gb/
 
 ## 🎯 Próximos Passos
 
-1. ✅ **Documentação completa** (35/35 containers)
+1. ✅ **Documentação completa** (34/34 containers)
 2. ⏳ **Testes de carga** (validar estimativas)
 3. ⏳ **Benchmarks ARM64** (performance real)
 4. ⏳ **Otimizações finais** (tuning)

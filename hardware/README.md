@@ -8,7 +8,7 @@ Este diretório organiza todos os hardwares do sistema Mordomo. Cada hardware é
 
 | Hardware | Módulo | RAM | LLM | NPU/GPU | Preço | Consumo |
 |----------|--------|-----|-----|---------|-------|---------|
-| Orange Pi 5 Ultra 16GB | ✅ Mordomo Central + OpenClaw + **IoT** (35 containers) | 16GB | Cloud API (LiteLLM) | 6 TOPS | $130 | 10-18W |
+| Orange Pi 5 Ultra 16GB | ✅ Mordomo Central + OpenClaw + **IoT** (34 containers) | 16GB | Cloud API (LiteLLM) | 6 TOPS | $130 | 10-18W |
 | Jetson Orin Nano 8GB | Segurança (Vision) (7 containers) | 8GB | Qwen 3B Vision (local, necessário para RT) | 1024 CUDA | $312 | 10-15W |
 | RPi 5 16GB | Investimentos (7 containers) | 16GB | Cloud API (LiteLLM) | - | $140 | 6-10W |
 | NAS (RPi 5 8GB) | NAS + Entretenimento (9 containers) | 8GB | Cloud API (LiteLLM) | - | $355 | 6-10W |
@@ -38,7 +38,7 @@ Se privacidade total ou offline for necessário: **Jetson Orin Nano Super** ($24
 
 ```
 hardware/
-├── mordomo - (orange-pi-5-16gb)/         # Central: Mordomo + IoT — 35 containers
+├── mordomo - (orange-pi-5-16gb)/         # Central: Mordomo + IoT — 34 containers
 │   └── ecossistemas/
 │       ├── mordomo/              # 21 containers (STT + Output + OpenClaw + Core + Identity + Financas)
 │       ├── iot/                  # 4 containers (Wi-Fi AP + MQTT + Redis + TV)
@@ -105,7 +105,7 @@ hardware/
 
 ## 🚀 Roadmap de Implementação
 
-1. **Fase 1**: ✅ Mordomo + OpenClaw + IoT (Orange Pi 5 Ultra 16GB) - Sistema central (35 containers)
+1. **Fase 1**: ✅ Mordomo + OpenClaw + IoT (Orange Pi 5 Ultra 16GB) - Sistema central (34 containers)
 2. **Fase 2**: NAS + Jellyfin (RPi 5 8GB) - Armazenamento e media
 3. **Fase 3**: Segurança (Jetson Orin Nano) - Câmeras e monitoramento
 4. **Fase 4**: Investimentos (RPi 5 16GB) - Trading e análise financeira

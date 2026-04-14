@@ -101,7 +101,6 @@ Serviços de suporte:
 - `consul` - Service discovery
 - `qdrant` - Vector database (RAG)
 - `postgres` - Banco relacional
-- `aslam-app` - Tablet interface (React)
 
 ### 📊 Monitoramento (4 containers)
 Observabilidade:
