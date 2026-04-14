@@ -492,11 +492,13 @@ LOKI_RETENTION=7d
 ```
 orange-pi-5-16gb/
 ├── README.md (este arquivo)
-├── docker-compose.yml
-├── .env
+├── docker-compose.yml              # Master: inclui todos os ecossistemas via extends/include
+├── .env                            # Variáveis globais (API keys, IPs, portas)
+│
 ├── ecossistemas/
-│   ├── mordomo/                        # 21 containers
+│   ├── mordomo/                    # 21 containers
 │   │   ├── README.md
+│   │   ├── docker-compose.yml      # Todos os 21 containers mordomo-*
 │   │   └── containers/
 │   │       ├── audio-capture-vad/
 │   │       ├── wake-word-detector/
@@ -519,15 +521,19 @@ orange-pi-5-16gb/
 │   │       ├── mordomo-vault/
 │   │       ├── mordomo-financas-pix/
 │   │       └── mordomo-financas-contas/
-│   ├── iot/                            # 4 containers
+│   │
+│   ├── iot/                        # 4 containers
 │   │   ├── README.md
+│   │   ├── docker-compose.yml      # iot-orchestrator, mqtt-broker, state-cache, tv-connector
 │   │   └── containers/
 │   │       ├── iot-orchestrator/
 │   │       ├── iot-mqtt-broker/
 │   │       ├── iot-state-cache/
 │   │       └── iot-tv-connector/
-│   ├── infraestrutura/                 # 6 containers
+│   │
+│   ├── infraestrutura/             # 6 containers
 │   │   ├── README.md
+│   │   ├── docker-compose.yml      # nats, consul, qdrant, postgres, aslam-app, llm-gateway
 │   │   └── containers/
 │   │       ├── nats/
 │   │       ├── consul/
@@ -535,18 +541,26 @@ orange-pi-5-16gb/
 │   │       ├── postgres/
 │   │       ├── aslam-app/
 │   │       └── llm-gateway/
-│   └── monitoramento/                  # 4 containers
+│   │
+│   └── monitoramento/              # 4 containers
 │       ├── README.md
+│       ├── docker-compose.yml      # prometheus, loki, grafana, promtail
 │       └── containers/
 │           ├── prometheus/
 │           ├── loki/
 │           ├── grafana/
 │           └── promtail/
+│
 └── scripts/
-    ├── deploy.sh
-    ├── backup.sh
-    └── monitor.sh
+    ├── deploy.sh                   # docker compose up -d (todos os ecossistemas)
+    ├── backup.sh                   # dump postgres + volumes
+    └── monitor.sh                  # docker stats + alertas
 ```
+
+> **Hierarquia dos Compose:**  
+> O `docker-compose.yml` raiz referencia os 4 arquivos de ecossistema via `include:`.  
+> Cada ecossistema pode ser iniciado de forma independente com `docker compose -f ecossistemas/mordomo/docker-compose.yml up -d`.  
+> Todos os containers compartilham a rede `mordomo-net` definida no Compose raiz.
 
 ---
 
