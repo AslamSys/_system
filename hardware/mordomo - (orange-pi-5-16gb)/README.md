@@ -20,7 +20,7 @@ Este hardware hospeda **todos os 4 ecossistemas** do núcleo do sistema em um ú
 │         Orange Pi 5 Ultra (16GB RAM, ARM64)       │
 ├─────────────────────────────────────────────────┤
 │                                                 │
-│  📦 Ecossistema MORDOMO (15 containers)         │
+│  📦 Ecossistema MORDOMO (21 containers)         │
 │  🎤 STT (6 containers):                          │
 │  ├─ audio-capture-vad                           │
 │  ├─ wake-word-detector                          │
@@ -28,25 +28,33 @@ Este hardware hospeda **todos os 4 ecossistemas** do núcleo do sistema em um ú
 │  ├─ whisper-asr                                 │
 │  ├─ speaker-id-diarization                      │
 │  └─ source-separation                           │
-│  🔊 TTS (2 containers):                          │
+│  🔊 Output (3 containers):                       │
 │  ├─ audio-bridge (Rust - WebRTC ↔ Pipeline)     │
-│  └─ tts-engine                                  │
+│  ├─ tts-engine                                  │
+│  └─ visual-feedback (LEDs GPIO)                 │
 │  🤖 OPENCLAW (1 container):                      │
 │  └─ openclaw-agent (Gateway + Browser RPA +     │
 │     Skills Hub + Brain Bridge — LLM próprio)    │
-│  🧠 CORE (6 containers):                         │
+│  🧠 CORE (7 containers):                         │
 │  ├─ mordomo-orchestrator (Unified Session+Core) │
 │  ├─ mordomo-brain (LLM + RAG)                   │
 │  ├─ system-watchdog (Thermal + DEFCON)          │
 │  ├─ core-gateway (REST + WebSocket)             │
 │  ├─ skills-runner (Python Sandbox)              │
+│  ├─ action-dispatcher (Ação → Executor)         │
 │  └─ dashboard-ui                                │
+│  👤 IDENTIDADE (2 containers):                   │
+│  ├─ mordomo-people (Perfis + Auth)              │
+│  └─ mordomo-vault (Secrets + Keys)              │
+│  💳 FINANCAS (2 containers):                     │
+│  ├─ mordomo-financas-pix (PIX Gateway)          │
+│  └─ mordomo-financas-contas (Contas/Saldo)      │
 │                                                 │
 │  📱 Ecossistema IoT (4 containers)               │
 │  ├─ iot-orchestrator (NATS → MQTT)              │
-│  ├─ mqtt-broker (Mosquitto - ESP32 AP)          │
+│  ├─ iot-mqtt-broker (Mosquitto - ESP32 AP)      │
 │  ├─ iot-state-cache (Redis < 5ms)               │
-│  └─ bluetooth-scanner (BLE presence)            │
+│  └─ iot-tv-connector (TV/HDMI control)          │
 │                                                 │
 │  🏗️ Ecossistema INFRAESTRUTURA (6 containers)   │
 │  ├─ nats (message broker)                       │
@@ -62,7 +70,7 @@ Este hardware hospeda **todos os 4 ecossistemas** do núcleo do sistema em um ú
 │  ├─ grafana                                     │
 │  └─ promtail (log collector)                    │
 │                                                 │
-│  Total: 29 containers                           │
+│  Total: 35 containers                           │
 │  📊 Status: Todos em planejamento (📋)           │
 └─────────────────────────────────────────────────┘
 ```
@@ -71,9 +79,9 @@ Este hardware hospeda **todos os 4 ecossistemas** do núcleo do sistema em um ú
 
 ## 📦 Containers e Repositórios
 
-Este hardware executa **29 containers** distribuídos em 4 ecossistemas:
+Este hardware executa **35 containers** distribuídos em 4 ecossistemas:
 
-### 🎤 Ecossistema Mordomo (14 containers)
+### 🎤 Ecossistema Mordomo (21 containers)
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
@@ -90,20 +98,27 @@ Este hardware executa **29 containers** distribuídos em 4 ecossistemas:
 | **mordomo-brain** | LLM + RAG + Reasoning | 📋 | [AslamSys/mordomo-brain](https://github.com/AslamSys/mordomo-brain) |
 | **system-watchdog** | DEFCON + Thermal protection | 📋 | [AslamSys/mordomo-system-watchdog](https://github.com/AslamSys/mordomo-system-watchdog) |
 | **core-gateway** | REST + WebSocket API | 📋 | [AslamSys/mordomo-core-gateway](https://github.com/AslamSys/mordomo-core-gateway) |
+| **skills-runner** | Executor Python Sandbox | 📋 | [AslamSys/mordomo-skills-runner](https://github.com/AslamSys/mordomo-skills-runner) |
+| **action-dispatcher** | Despacho de ações | 📋 | [AslamSys/mordomo-action-dispatcher](https://github.com/AslamSys/mordomo-action-dispatcher) |
 | **dashboard-ui** | Interface Canvas A2UI | 📋 | [AslamSys/mordomo-dashboard-ui](https://github.com/AslamSys/mordomo-dashboard-ui) |
+| **visual-feedback** | LEDs GPIO + feedback visual | 📋 | [AslamSys/mordomo-visual-feedback](https://github.com/AslamSys/mordomo-visual-feedback) |
+| **mordomo-people** | Perfis de usuário + Auth | 📋 | [AslamSys/mordomo-people](https://github.com/AslamSys/mordomo-people) |
+| **mordomo-vault** | Secrets + Chaves criptografadas | 📋 | [AslamSys/mordomo-vault](https://github.com/AslamSys/mordomo-vault) |
+| **mordomo-financas-pix** | Gateway PIX | 📋 | [AslamSys/mordomo-financas-pix](https://github.com/AslamSys/mordomo-financas-pix) |
+| **mordomo-financas-contas** | Contas + Saldo | 📋 | [AslamSys/mordomo-financas-contas](https://github.com/AslamSys/mordomo-financas-contas) |
 
 ### 📱 Ecossistema IoT (4 containers)
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
-| **iot-orchestrator** | Tradução NATS → MQTT para ESP32 | 📋 | [AslamSys/iot-orchestrator](https://github.com/AslamSys/iot-orchestrator) |
-| **mqtt-broker** | Broker MQTT local (Mosquitto) | 📋 | [AslamSys/iot-mqtt-broker](https://github.com/AslamSys/iot-mqtt-broker) |
-| **iot-state-cache** | Cache Redis para estados IoT | 📋 | [AslamSys/iot-state-cache](https://github.com/AslamSys/iot-state-cache) |
-| **bluetooth-scanner** | Presence detection via BLE | 📋 | *Repositório aguardando criação* |
+| **iot-orchestrator** | Tradução NATS → MQTT para ESP32 | 📋 | [AslamSys/mordomo-iot-orchestrator](https://github.com/AslamSys/mordomo-iot-orchestrator) |
+| **iot-mqtt-broker** | Broker MQTT local (Mosquitto) | 📋 | [AslamSys/mordomo-iot-mqtt-broker](https://github.com/AslamSys/mordomo-iot-mqtt-broker) |
+| **iot-state-cache** | Cache Redis para estados IoT | 📋 | [AslamSys/mordomo-iot-state-cache](https://github.com/AslamSys/mordomo-iot-state-cache) |
+| **iot-tv-connector** | Controle de TV via HDMI/IP | 📋 | [AslamSys/mordomo-iot-tv-connector](https://github.com/AslamSys/mordomo-iot-tv-connector) |
 
 _Nota: O Wi-Fi 6 do Orange Pi 5 Ultra opera como **Access Point dedicado** (hostapd + interface virtual) para os dispositivos ESP32 na rede `10.0.0.x`. A conexão com a rede doméstica/internet é feita exclusivamente via **eth0** (Gigabit Ethernet)._
 
-### 🏗️ Ecossistema Infraestrutura (5 containers)
+### 🏗️ Ecossistema Infraestrutura (6 containers)
 
 | Container | Função | Status | Repositório |
 |-----------|--------|--------|-------------|
@@ -273,7 +288,7 @@ _Nota: O IoT **não tem IA**. Zero inferência, zero modelo. É puro roteamento 
 
 ---
 
-### 📈 Total Consolidado (28 containers)
+### 📈 Total Consolidado (35 containers)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -281,32 +296,32 @@ _Nota: O IoT **não tem IA**. Zero inferência, zero modelo. É puro roteamento 
 ├──────────────────────┬─────────────┬─────────────┬─────────────┤
 │ Ecossistema          │ Containers  │ RAM (idle)  │ RAM (pico)  │
 ├──────────────────────┼─────────────┼─────────────┼─────────────┤
-│ 🏠 Mordomo           │ 15          │ ~3.4 GB     │ ~4.2 GB     │
+│ 🏠 Mordomo           │ 21          │ ~3.9 GB     │ ~4.7 GB     │
 │ 📱 IoT               │ 4           │ ~460 MB     │ ~460 MB     │
 │ 🔧 Infraestrutura    │ 6           │ ~1.1 GB     │ ~1.1 GB     │
 │ 📊 Monitoramento     │ 4           │ ~880 MB     │ ~1.0 GB     │
 ├──────────────────────┼─────────────┼─────────────┼─────────────┤
-│ Subtotal containers  │ 29          │ ~5.9 GB     │ ~6.8 GB     │
+│ Subtotal containers  │ 35          │ ~6.4 GB     │ ~7.3 GB     │
 │ OS + Docker runtime  │ —           │ ~1.5 GB     │ ~1.5 GB     │
 ├──────────────────────┼─────────────┼─────────────┼─────────────┤
-│ TOTAL                │ —           │ ~7.4 GB     │ ~8.3 GB     │
-│ DISPONÍVEL (16GB)    │ —           │ ~8.6 GB     │ ~7.7 GB     │
-│ MARGEM LIVRE         │ —           │ 54%         │ 48%         │
+│ TOTAL                │ —           │ ~7.9 GB     │ ~8.8 GB     │
+│ DISPONÍVEL (16GB)    │ —           │ ~8.1 GB     │ ~7.2 GB     │
+│ MARGEM LIVRE         │ —           │ 51%         │ 45%         │
 └──────────────────────┴─────────────┴─────────────┴─────────────┘
 ```
 
 ```yaml
 CPU Total (pico):  200-390% (2.0-3.9 cores de 8 disponíveis)
-RAM Total (pico):  ~8.3GB de 16GB
+RAM Total (pico):  ~8.8GB de 16GB
 Storage:           20-35GB (containers + data)
 Margem CPU:        ✅ Sobra 4.1-5.8 cores (51-73% livre)
-Margem RAM:        ✅ Sobra ~7.7GB em idle / ~7.7GB no pico
+Margem RAM:        ✅ Sobra ~7.2GB no pico (45% livre)
 ```
 
 > **Pico** = browser do openclaw-agent ativo simultaneamente com todos os containers.  
 > O Whisper ASR e o browser são os dois maiores consumidores individuais (~1.5GB e ~2GB respectivamente).
 
-**Conclusão:** ✅ **VIÁVEL** — 29 containers rodam com ~48% de RAM livre mesmo no pico. O `llm-gateway` adiciona apenas ~200MB mas centraliza todo o controle de inferência do sistema.
+**Conclusão:** ✅ **VIÁVEL** — 35 containers rodam com ~45% de RAM livre mesmo no pico. O `llm-gateway` centraliza todo o controle de inferência; os 7 novos containers (visual-feedback, action-dispatcher, people, vault, financas) adicionam apenas ~500MB.
 
 ---
 
@@ -480,7 +495,7 @@ orange-pi-5-16gb/
 ├── docker-compose.yml
 ├── .env
 ├── ecossistemas/
-│   ├── mordomo/
+│   ├── mordomo/                        # 21 containers
 │   │   ├── README.md
 │   │   └── containers/
 │   │       ├── audio-capture-vad/
@@ -489,25 +504,44 @@ orange-pi-5-16gb/
 │   │       ├── whisper-asr/
 │   │       ├── speaker-id-diarization/
 │   │       ├── source-separation/
-│   │       ├── mordomo-core-api/
-│   │       ├── mordomo-brain/
+│   │       ├── audio-bridge/
 │   │       ├── tts-engine/
-│   │       ├── event-bus/
-│   │       ├── discovery-service/
-│   │       └── dashboard-ui/
-│   ├── infraestrutura/
+│   │       ├── visual-feedback/
+│   │       ├── openclaw-agent/
+│   │       ├── mordomo-orchestrator/
+│   │       ├── mordomo-brain/
+│   │       ├── system-watchdog/
+│   │       ├── core-gateway/
+│   │       ├── skills-runner/
+│   │       ├── action-dispatcher/
+│   │       ├── dashboard-ui/
+│   │       ├── mordomo-people/
+│   │       ├── mordomo-vault/
+│   │       ├── mordomo-financas-pix/
+│   │       └── mordomo-financas-contas/
+│   ├── iot/                            # 4 containers
+│   │   ├── README.md
+│   │   └── containers/
+│   │       ├── iot-orchestrator/
+│   │       ├── iot-mqtt-broker/
+│   │       ├── iot-state-cache/
+│   │       └── iot-tv-connector/
+│   ├── infraestrutura/                 # 6 containers
 │   │   ├── README.md
 │   │   └── containers/
 │   │       ├── nats/
 │   │       ├── consul/
 │   │       ├── qdrant/
-│   │       └── postgres/
-│   └── monitoramento/
+│   │       ├── postgres/
+│   │       ├── aslam-app/
+│   │       └── llm-gateway/
+│   └── monitoramento/                  # 4 containers
 │       ├── README.md
 │       └── containers/
 │           ├── prometheus/
 │           ├── loki/
-│           └── grafana/
+│           ├── grafana/
+│           └── promtail/
 └── scripts/
     ├── deploy.sh
     ├── backup.sh
@@ -518,7 +552,7 @@ orange-pi-5-16gb/
 
 ## 🎯 Próximos Passos
 
-1. ✅ **Documentação completa** (19/19 containers)
+1. ✅ **Documentação completa** (35/35 containers)
 2. ⏳ **Testes de carga** (validar estimativas)
 3. ⏳ **Benchmarks ARM64** (performance real)
 4. ⏳ **Otimizações finais** (tuning)
@@ -527,5 +561,5 @@ orange-pi-5-16gb/
 ---
 
 **Hardware Owner:** Renan  
-**Última atualização:** 27/11/2025  
+**Última atualização:** 14/04/2026  
 **Status:** 📝 Documentação Completa
